@@ -7,5 +7,12 @@
   "license": "MIT",
   "private": true,
   "author": "Daniel Giljam (https://github.com/DanielGiljam)",
-  "repository": "github:DanielGiljam/nextjs-serverless-on-firebase-template"
+  "repository": "github:DanielGiljam/nextjs-serverless-on-firebase-template",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.17.0",
+    "prettier": "^1.19.1",
+    "prettier-eslint": "^9.0.1"
+  }
 }
