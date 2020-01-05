@@ -7,12 +7,25 @@
   "license": "MIT",
   "private": true,
   "author": "Daniel Giljam (https://github.com/DanielGiljam)",
+  "main": "src/cloud-functions/index.js",
   "repository": "github:DanielGiljam/nextjs-serverless-on-firebase-template",
+  "scripts": {
+    "serve": "firebase serve --only functions,hosting",
+    "deploy": "firebase deploy --only functions,hosting"
+  },
+  "dependencies": {
+    "firebase-admin": "^8.6.0",
+    "firebase-functions": "^3.3.0"
+  },
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.17.0",
+    "firebase-functions-test": "^0.1.6",
     "prettier": "^1.19.1",
     "prettier-eslint": "^9.0.1"
+  },
+  "engines": {
+    "node": "8"
   }
 }
