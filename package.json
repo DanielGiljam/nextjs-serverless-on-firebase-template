@@ -1,0 +1,11 @@
+{
+  "name": "nextjs-serverless-on-firebase-template",
+  "version": "0.0.0",
+  "description": "Next.js + build target: serverless + Cloud Functions for Firebase + Firebase Hosting",
+  "homepage": "https://github.com/DanielGiljam/nextjs-serverless-on-firebase-template#readme",
+  "bugs": "https://github.com/DanielGiljam/nextjs-serverless-on-firebase-template/issues",
+  "license": "MIT",
+  "private": true,
+  "author": "Daniel Giljam (https://github.com/DanielGiljam)",
+  "repository": "github:DanielGiljam/nextjs-serverless-on-firebase-template"
+}
