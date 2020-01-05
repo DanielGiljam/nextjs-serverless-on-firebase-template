@@ -10,6 +10,8 @@
   "main": "src/cloud-functions/index.js",
   "repository": "github:DanielGiljam/nextjs-serverless-on-firebase-template",
   "scripts": {
+    "lint": "eslint \"src/**\"",
+    "format": "prettier-eslint \"src/**\"",
     "serve": "firebase serve --only functions,hosting",
     "build": "next build",
     "deploy": "firebase deploy --only functions,hosting"
@@ -26,6 +28,7 @@
     "next": "^9.1.7",
     "prettier": "^1.19.1",
     "prettier-eslint": "^9.0.1",
+    "prettier-eslint-cli": "^5.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
