@@ -1,9 +1,20 @@
 {
   "functions": {
-    "source": "."
+    "source": ".",
+    "predeploy": [
+      "npm run build",
+      "mkdir -p public/_next/static",
+      "cp -Rp .next/static/ public/_next/static"
+    ]
   },
   "hosting": {
     "public": "public",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "/",
+        "function": "next-index"
+      }
+    ]
   }
 }
