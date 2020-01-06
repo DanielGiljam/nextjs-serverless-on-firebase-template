@@ -6,6 +6,7 @@ Index.getInitialProps = async () => {
   console.log(
       "Defining this function so that Next.js compiles this page as a \"lambda\".",
   )
+  return {}
 }
 
 export default Index
