@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="JSX" pattern="file[nextjs-serverless-on-firebase-template]:*.jsx" />
+</component>
