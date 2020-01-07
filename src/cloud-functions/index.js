@@ -1,9 +1,13 @@
 const functions = require("firebase-functions")
+const next = require("next")
 
-const index = require("../../.next/serverless/pages/index")
+const app = next({})
+const handle = app.getRequestHandler()
 
 module.exports = {
   next: {
-    index: functions.https.onRequest(index.render),
+    server: functions.https.onRequest((req, res) => {
+      app.prepare().then(() => handle(req, res))
+    }),
   },
 }
