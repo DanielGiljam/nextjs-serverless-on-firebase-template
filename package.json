@@ -18,9 +18,9 @@
     "deploy:mui-react-njs-cfr-template": "npm run deploy:mui-react-njs-cfr-template:functions && npm run deploy:mui-react-njs-cfr-template:hosting",
     "deploy:mui-react-njs-cfr-template:functions": "firebase deploy --only functions:next-index,functions:next-about",
     "deploy:mui-react-njs-cfr-template:hosting": "firebase deploy --only hosting:mui-react-njs-cfr-template",
-    "deploy:serverless": "npm run deploy:serverless:functions && npm run deploy:serverless:hosting",
-    "deploy:serverless:functions": "firebase deploy --only functions:next-serverless-index,functions:next-serverless-about",
-    "deploy:serverless:hosting": "firebase deploy --only hosting:serverless"
+    "deploy:not-serverless": "npm run deploy:not-serverless:functions && npm run deploy:not-serverless:hosting",
+    "deploy:not-serverless:functions": "firebase deploy --only functions:next-not-serverless",
+    "deploy:not-serverless:hosting": "firebase deploy --only hosting:not-serverless"
   },
   "dependencies": {
     "@material-ui/core": "^4.8.3",
