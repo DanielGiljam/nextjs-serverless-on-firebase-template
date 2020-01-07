@@ -26,7 +26,7 @@
       "rewrites": [
         {
           "source": "**/**",
-          "function": "next-not-serverless"
+          "function": "next-notServerless"
         }
       ]
     }

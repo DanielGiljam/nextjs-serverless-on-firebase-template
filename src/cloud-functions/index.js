@@ -6,7 +6,7 @@ const handle = app.getRequestHandler()
 
 module.exports = {
   next: {
-    "not-serverless": functions.https.onRequest((req, res) => {
+    "notServerless": functions.https.onRequest((req, res) => {
       app.prepare().then(() => handle(req, res))
     }),
   },
