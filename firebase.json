@@ -3,6 +3,7 @@
     "source": ".",
     "predeploy": [
       "npm run build",
+      "rm -rf public/_next/static",
       "mkdir -p public/_next/static",
       "cp -Rp .next/static/ public/_next/static"
     ]
