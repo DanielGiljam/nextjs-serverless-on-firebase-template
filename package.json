@@ -12,11 +12,24 @@
   "scripts": {
     "serve": "firebase serve --only functions,hosting",
     "build": "next build",
-    "deploy": "firebase deploy --only functions,hosting"
+    "deploy": "npm run deploy:functions && npm run deploy:hosting",
+    "deploy:functions": "firebase deploy --only functions",
+    "deploy:hosting": "firebase deploy --only hosting",
+    "deploy:mui-react-njs-cfr-template": "npm run deploy:mui-react-njs-cfr-template:functions && npm run deploy:mui-react-njs-cfr-template:hosting",
+    "deploy:mui-react-njs-cfr-template:functions": "firebase deploy --only functions:next-index,functions:next-about",
+    "deploy:mui-react-njs-cfr-template:hosting": "firebase deploy --only hosting:mui-react-njs-cfr-template",
+    "deploy:serverless": "npm run deploy:serverless:functions && npm run deploy:serverless:hosting",
+    "deploy:serverless:functions": "firebase deploy --only functions:next-serverless-index,functions:next-serverless-about",
+    "deploy:serverless:hosting": "firebase deploy --only hosting:serverless"
   },
   "dependencies": {
+    "@material-ui/core": "^4.8.3",
+    "@material-ui/icons": "^4.5.1",
+    "@material-ui/styles": "^4.8.2",
     "firebase-admin": "^8.6.0",
     "firebase-functions": "^3.3.0",
+    "isomorphic-unfetch": "^3.0.0",
+    "js-cookie": "^2.2.1",
     "next": "^9.1.7",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"

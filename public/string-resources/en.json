@@ -1,0 +1,13 @@
+{
+  "lang": "en",
+  "general": {
+    "siteName": "Material-UI + React + Next.js Template",
+    "pageNames": {
+      "home": "home",
+      "about": "about"
+    },
+    "templates": {
+      "thisIsTheXPage": "This is the %s -page"
+    }
+  }
+}

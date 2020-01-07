@@ -2,16 +2,16 @@ import Typography from "@material-ui/core/Typography"
 
 import useStrings from "../resources/strings/useStrings"
 
-function Index() {
+function About() {
   const strings = useStrings()
   return (
     <Typography variant={"body1"}>
       {String.format(
           strings.general.templates.thisIsTheXPage,
-          strings.general.pageNames.home.ucFirst(),
+          strings.general.pageNames.about.ucFirst(),
       )}
     </Typography>
   )
 }
 
-export default Index
+export default About
