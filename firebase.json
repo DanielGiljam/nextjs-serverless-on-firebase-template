@@ -16,6 +16,10 @@
         {
           "source": "/",
           "function": "next-index"
+        },
+        {
+          "source": "/about",
+          "function": "next-about"
         }
       ]
     },
@@ -27,6 +31,10 @@
         {
           "source": "/",
           "function": "next-serverless-index"
+        },
+        {
+          "source": "/about",
+          "function": "next-serverless-about"
         }
       ]
     }
