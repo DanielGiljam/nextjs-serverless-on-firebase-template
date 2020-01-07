@@ -12,7 +12,15 @@
   "scripts": {
     "serve": "firebase serve --only functions,hosting",
     "build": "next build",
-    "deploy": "firebase deploy --only functions,hosting"
+    "deploy": "npm run deploy:functions && npm run deploy:hosting",
+    "deploy:functions": "firebase deploy --only functions",
+    "deploy:hosting": "firebase deploy --only hosting",
+    "deploy:mui-react-njs-cfr-template": "npm run deploy:mui-react-njs-cfr-template:functions && npm run deploy:mui-react-njs-cfr-template:hosting",
+    "deploy:mui-react-njs-cfr-template:functions": "firebase deploy --only functions:next-index",
+    "deploy:mui-react-njs-cfr-template:hosting": "firebase deploy --only hosting:mui-react-njs-cfr-template",
+    "deploy:serverless": "npm run deploy:serverless:functions && npm run deploy:serverless:hosting",
+    "deploy:serverless:functions": "firebase deploy --only functions:next-serverless-index",
+    "deploy:serverless:hosting": "firebase deploy --only hosting:serverless"
   },
   "dependencies": {
     "firebase-admin": "^8.6.0",

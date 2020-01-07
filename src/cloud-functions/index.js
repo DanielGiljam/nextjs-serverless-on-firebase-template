@@ -5,5 +5,8 @@ const index = require("../../.next/serverless/pages/index")
 module.exports = {
   next: {
     index: functions.https.onRequest(index.render),
+    serverless: {
+      index: functions.https.onRequest(index.render),
+    },
   },
 }
