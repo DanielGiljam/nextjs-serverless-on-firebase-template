@@ -2,6 +2,7 @@
   "functions": {
     "source": ".",
     "predeploy": [
+      "rm -rf .next",
       "npm run build",
       "rm -rf public/_next/static",
       "mkdir -p public/_next/static",
