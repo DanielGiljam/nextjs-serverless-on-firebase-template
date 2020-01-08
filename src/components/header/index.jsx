@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button"
 import Toolbar from "@material-ui/core/Toolbar"
 import Typography from "@material-ui/core/Typography"
 
-import useStrings from "../../resources/strings/useStrings"
+import useStrings from "resources/strings/useStrings"
 
 function Header() {
   const strings = useStrings()

@@ -1,22 +1,22 @@
 import __app from "next/app"
 import Head from "next/head"
 import CssBaseline from "@material-ui/core/CssBaseline"
-import Header from "../components/header"
+import Header from "components/header"
 
 import {ThemeProvider} from "@material-ui/core/styles"
-import {StringsProvider} from "../resources/strings"
+import {StringsProvider} from "resources/strings"
 
-import makeStrings from "../resources/strings/makeStrings"
-import makeTheme from "../resources/theme/makeTheme"
+import makeStrings from "resources/strings/makeStrings"
+import makeTheme from "resources/theme/makeTheme"
 
 import {
   getLangServerSide,
   getLangClientSide,
   extendStringClass,
-} from "../resources/strings/functions"
-import {getThemeTypeServerSide} from "../resources/theme/functions"
+} from "resources/strings/functions"
+import {getThemeTypeServerSide} from "resources/theme/functions"
 
-import parseCookieHeader from "../utility/parse-cookie-header"
+import parseCookieHeader from "utility/parse-cookie-header"
 
 /*
  * Material-UI integration achieved thanks to this example: https://github.com/mui-org/material-ui/tree/master/examples/nextjs 2019-09-13
