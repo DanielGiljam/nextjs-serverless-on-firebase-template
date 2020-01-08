@@ -22,6 +22,14 @@
         {
           "source": "/about",
           "function": "next-about"
+        },
+        {
+          "source": "/example{,/**}",
+          "function": "next-example"
+        },
+        {
+          "source": "/@(en|sv|fi){,/**}",
+          "function": "next-lang"
         }
       ]
     },
