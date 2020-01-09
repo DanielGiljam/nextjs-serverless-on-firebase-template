@@ -1,4 +1,4 @@
-import Cookies from "js-cookie"
+import parseCookies from "utility/parse-cookies"
 
 export async function getLangServerSide(cookies, acceptLanguageHeader) {
   const supportedLanguages = (
@@ -60,7 +60,7 @@ export async function getLangClientSide() {
     let browserPreference
     // 3. Reading "lang" cookie
     if (
-      (cookie = Cookies.get("lang")) !== null &&
+      (cookie = parseCookies(document.cookie).lang) !== null &&
       supportedLanguages.includes(cookie.slice(0, 2))
     ) {
       console.log(

@@ -16,7 +16,7 @@ import {
 } from "resources/strings/functions"
 import {getThemeTypeServerSide} from "resources/theme/functions"
 
-import parseCookieHeader from "utility/parse-cookie-header"
+import parseCookieHeader from "utility/parse-cookies"
 
 /*
  * Material-UI integration achieved thanks to this example: https://github.com/mui-org/material-ui/tree/master/examples/nextjs 2019-09-13
