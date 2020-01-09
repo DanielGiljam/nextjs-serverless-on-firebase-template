@@ -38,8 +38,8 @@ function CookieConsentSnackbar({show, setCookieConsent}) {
 }
 
 CookieConsentSnackbar.propTypes = {
-  show: PropTypes.bool,
-  setCookieConsent: PropTypes.func,
+  show: PropTypes.bool.isRequired,
+  setCookieConsent: PropTypes.func.isRequired,
 }
 
 export default CookieConsentSnackbar
