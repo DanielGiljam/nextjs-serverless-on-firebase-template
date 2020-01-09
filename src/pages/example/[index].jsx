@@ -1,11 +1,11 @@
 import Typography from "@material-ui/core/Typography"
 
-import {useRouter} from "next/router"
 import useStrings from "resources/strings/useStrings"
+import {useRouter} from "next/router"
 
 function Example() {
-  const router = useRouter()
   const strings = useStrings()
+  const router = useRouter()
   const {index: example} = router.query
   console.log("example router:", router)
   return (
