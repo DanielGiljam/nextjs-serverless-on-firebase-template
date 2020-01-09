@@ -11,6 +11,21 @@
       "thisIsTheXExample": "This is an example of using dynamic routing. The query parameter is \"%s\"."
     }
   },
+  "header": {
+    "preferences": {
+      "cookieConsent": {
+        "label": "Cookie Consent",
+        "state": {
+          "positive": "You are giving consent to cookies.",
+          "negative": "You haven't given consent to cookies."
+        },
+        "action": {
+          "positive": "Allow cookies",
+          "negative": "Revoke consent"
+        }
+      }
+    }
+  },
   "example": {
     "thisIsNullExample": "This is an example of using dynamic routing, although there is no query parameter."
   },
