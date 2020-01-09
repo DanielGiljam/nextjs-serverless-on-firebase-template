@@ -105,6 +105,7 @@ export function extendStringClass() {
   Object.defineProperties(String, {
     format: {configurable: true, value: format, writable: true},
   })
+  // eslint-disable-next-line no-extend-native
   Object.defineProperties(String.prototype, {
     ucFirst: {configurable: true, value: ucFirst, writable: true},
     lcFirst: {configurable: true, value: lcFirst, writable: true},
@@ -127,31 +128,45 @@ function parseAcceptLanguageHeader(acceptLanguageHeader) {
 }
 
 function format(template, ...substitutions) {
+  const regExp = /([^\\])%s/
   let formattedString = template
   for (const substitution of substitutions) {
     const newFormattedString = formattedString.replace(
-        /([^\\])%s/,
-        `\$1${substitution}`,
+        regExp,
+        `$1${substitution}`,
     )
     if (formattedString === newFormattedString) {
       console.error(
           "String.format() was called with too many arguments. " +
           `Template: "${template}". substitutions: ${substitutions.reduce(
-              (accumulator, currentValue) => accumulator + `, "${currentValue}"`,
+              (accumulator, currentValue, index) =>
+              index ? accumulator + `, "${currentValue}"` : accumulator,
               `"${substitutions[0]}"`,
           )}.`,
       )
     }
     formattedString = newFormattedString
   }
+  if (regExp.test(formattedString)) {
+    throw new Error(
+        "String.format() was called with too few arguments. " +
+        `Template: "${template}". substitutions: ${substitutions.reduce(
+            (accumulator, currentValue, index) =>
+            index ? accumulator + `, "${currentValue}"` : accumulator,
+            `"${substitutions[0]}"`,
+        )}.`,
+    )
+  }
   return formattedString
 }
 
 function ucFirst() {
+  // eslint-disable-next-line no-invalid-this
   return this.replace(/^./, (match) => match.toUpperCase())
 }
 
 function lcFirst() {
+  // eslint-disable-next-line no-invalid-this
   return this.replace(/^./, (match) => match.toLowerCase())
 }
 

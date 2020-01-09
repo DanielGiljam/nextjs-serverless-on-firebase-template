@@ -1,3 +1,10 @@
 {
-  "cSpell.words": ["Giljam", "nextjs", "predeploy"]
+  "cSpell.words": [
+    "Giljam",
+    "builtins",
+    "nextjs",
+    "predeploy",
+    "serializable",
+    "unfetch"
+  ]
 }

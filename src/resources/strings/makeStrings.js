@@ -34,11 +34,13 @@ function checkForObjectProperties(
   for (const key in fallbackObject) {
     // Looking for properties that are objects
     if (
+      // eslint-disable-next-line no-prototype-builtins
       fallbackObject.hasOwnProperty(key) &&
       typeof fallbackObject[key] === "object"
     ) {
       const newFBO = fallbackObject[key]
       const newStructureSoFar = updateStructureSoFar(structureSoFar, key)
+      // eslint-disable-next-line no-prototype-builtins
       if (targetObject.hasOwnProperty(key)) {
         // Making sure the target object's corresponding property also is an object, else logs error telling about structural difference
         const newOBJ = targetObject[key]
@@ -73,11 +75,13 @@ function mergeOtherProperties(fallbackObject, targetObject, structureSoFar) {
   for (const key in fallbackObject) {
     // Looking for properties that aren't objects
     if (
+      // eslint-disable-next-line no-prototype-builtins
       fallbackObject.hasOwnProperty(key) &&
       typeof fallbackObject[key] !== "object"
     ) {
       const fallbackProperty = fallbackObject[key]
       const newStructureSoFar = updateStructureSoFar(structureSoFar, key)
+      // eslint-disable-next-line no-prototype-builtins
       if (targetObject.hasOwnProperty(key)) {
         // Making sure that mutual properties are of the same type, else logs error telling about structural difference
         const prop = targetObject[key]
