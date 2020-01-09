@@ -15,6 +15,7 @@ import parseCookies from "utility/parse-cookies"
 function CookieConsent() {
   const strings = useStrings().header.preferences.cookieConsent
   const [cookieConsent, setCookieConsent] = useState(false)
+  // TODO: get cookie consent (and other preferences) from a context!
   useEffect(() => {
     getCookieConsentClientSide(parseCookies(document.cookie))
         .then((cookieConsent) => {
@@ -34,6 +35,7 @@ function CookieConsent() {
   }
   return (
     <>
+      {/* TODO: this layout is broken. Make another layout! */}
       <ListItemText
         primary={strings.label}
         secondary={

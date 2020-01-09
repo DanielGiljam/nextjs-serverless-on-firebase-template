@@ -64,7 +64,7 @@ export async function setCookieConsentClientSide(cookieConsent) {
       )
     } else if (oldCookieConsent) {
       console.log("setCookieConsentClientSide: purging all existing cookies...")
-      document.cookie = ""
+      document.cookie = "" // TODO: this doesn't purge cookies. Find a working solution!
     }
   } else {
     throw new Error(
