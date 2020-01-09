@@ -16,7 +16,7 @@ import {
 } from "resources/strings/functions"
 import {getThemeTypeServerSide} from "resources/theme/functions"
 
-import parseCookieHeader from "utility/parse-cookies"
+import parseCookies from "utility/parse-cookies"
 
 /*
  * Material-UI integration achieved thanks to this example: https://github.com/mui-org/material-ui/tree/master/examples/nextjs 2019-09-13
@@ -49,7 +49,7 @@ class _app extends __app {
   }
 
   static async getInitialPropsServer({req, res}) {
-    const cookies = parseCookieHeader(req.headers["cookie"])
+    const cookies = parseCookies(req.headers["cookie"])
     const lang = await getLangServerSide(
         cookies,
         req.headers["accept-language"],
