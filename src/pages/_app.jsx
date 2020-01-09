@@ -2,6 +2,7 @@ import __app from "next/app"
 import Head from "next/head"
 import CssBaseline from "@material-ui/core/CssBaseline"
 import Header from "components/header"
+import CookieConsentSnackbar from "components/misc/cookie-consent-snackbar"
 
 import {ThemeProvider} from "@material-ui/core/styles"
 import {StringsProvider} from "resources/strings"
@@ -15,6 +16,10 @@ import {
   extendStringClass,
 } from "resources/strings/functions"
 import {getThemeTypeServerSide} from "resources/theme/functions"
+import {
+  getCookieConsentClientSide,
+  setCookieConsentClientSide,
+} from "utility/cookie-consent"
 
 import parseCookies from "utility/parse-cookies"
 
@@ -55,7 +60,11 @@ class _app extends __app {
         req.headers["accept-language"],
     )
     const themeType = await getThemeTypeServerSide(cookies)
-    res.setHeader("Set-Cookie", [`lang=${lang}`, `theme-type=${themeType}`]) // TODO: check cookie-consent before doing this!
+    if (cookies["cookie-consent"] === "true") {
+      // TODO: be more verbose about setting cookies!
+      // TODO: implement expiration timestamps for cookies that are set!
+      res.setHeader("Set-Cookie", [`lang=${lang}`, `theme-type=${themeType}`])
+    }
     /* NOTE: makeStrings() vs makeTheme():
      * - makeStrings() is asynchronous and gives by performance benefit by being run server-side
      * - makeTheme() is synchronous and cannot be run server-side due to it's return value not being serializable
@@ -65,18 +74,33 @@ class _app extends __app {
   }
 
   componentDidMount() {
-    // Remove the server-side injected CSS.
+    // 1. Remove the server-side injected CSS
     const jssStyles = document.querySelector("#jss-server-side")
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles)
     }
-    // Set language client side
-    getLangClientSide().then((lang) => {
-      if (lang !== this.state.strings.lang) {
-        console.log("getLangClientSide: changing language...")
-        makeStrings(lang).then((strings) => this.setState({strings}))
-      }
-    })
+    // (Parse cookies as they are read from in the following steps)
+    const cookies = parseCookies(document.cookie)
+    // 2. Check if client has allowed cookies
+    getCookieConsentClientSide(cookies)
+        .then((cookieConsent) => {
+          if (cookieConsent == null) this.setState({showCCS: true})
+        })
+        .catch((error) => console.error(error.stack))
+    // 3. Set language client side
+    getLangClientSide(cookies)
+        .then((lang) => {
+          if (lang !== this.state.strings.lang) {
+            makeStrings(lang).then((strings) => this.setState({strings}))
+          }
+        })
+        .catch((error) => console.error(error.stack))
+  }
+
+  setCookieConsent(cookieConsent) {
+    setCookieConsentClientSide(cookieConsent)
+        .then(() => this.setState({showCCS: false}))
+        .catch((error) => console.error(error.stack))
   }
 
   render() {
@@ -84,7 +108,7 @@ class _app extends __app {
       Component,
       pageProps: {appProps, ...pageProps},
     } = this.props
-    const {strings, theme} = this.state
+    const {strings, theme, showCCS} = this.state
     return (
       <>
         <Head>
@@ -98,6 +122,10 @@ class _app extends __app {
             <main style={{padding: theme.spacing(3)}}>
               <Component {...pageProps} />
             </main>
+            <CookieConsentSnackbar
+              show={!!showCCS}
+              setCookieConsent={this.setCookieConsent.bind(this)}
+            />
           </StringsProvider>
         </ThemeProvider>
       </>

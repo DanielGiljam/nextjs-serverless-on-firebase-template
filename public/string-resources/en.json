@@ -13,5 +13,10 @@
   },
   "example": {
     "thisIsNullExample": "This is an example of using dynamic routing, although there is no query parameter."
+  },
+  "cookieConsentSnackbar": {
+    "message": "This website uses cookies in order to provide a faster, more customized user experience. Is it okay if we proceed in using cookies?",
+    "yes": "Yes, whatever",
+    "no": "No, don't use cookies"
   }
 }

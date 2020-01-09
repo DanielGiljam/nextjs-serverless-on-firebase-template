@@ -1,10 +1,10 @@
 import fetch from "isomorphic-unfetch"
 
 async function makeStrings(lang) {
+  console.log("makeStrings: fetching strings for \"en\"...")
   const en = await stringsFetcher("en")
-  if (/^en-/.test(lang)) return en
-  if (/^sv-/.test(lang)) lang = "sv"
-  if (/^fi-/.test(lang)) lang = "fi"
+  if (lang === "en") return en
+  console.log(`makeStrings: fetching strings for "${lang}"...`)
   const stringResources = await stringsFetcher(lang)
   return mergeResources(en, stringResources, "stringResources")
 }

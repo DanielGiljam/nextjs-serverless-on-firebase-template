@@ -1,5 +1,3 @@
-import parseCookies from "utility/parse-cookies"
-
 export async function getLangServerSide(cookies, acceptLanguageHeader) {
   const supportedLanguages = (
     await fetch(`${process.env.ASSET_PREFIX}/data.json`).then((res) =>
@@ -31,7 +29,7 @@ export async function getLangServerSide(cookies, acceptLanguageHeader) {
   return "en"
 }
 
-export async function getLangClientSide() {
+export async function getLangClientSide(cookies) {
   if (typeof window !== "undefined" && typeof navigator !== "undefined") {
     // 1. Reading localStorage
     const local = window.localStorage.lang
@@ -60,25 +58,25 @@ export async function getLangClientSide() {
     let browserPreference
     // 3. Reading "lang" cookie
     if (
-      (cookie = parseCookies(document.cookie).lang) !== null &&
+      (cookie = cookies.lang) != null &&
       supportedLanguages.includes(cookie.slice(0, 2))
     ) {
       console.log(
           `getLangClientSide: setting language to "${cookie}" based on cookie.`,
       )
-      lang = cookie
+      lang = cookie.slice(0, 2)
     }
     // 3. Reading browser's language preferences
     else if (
       (browserPreference = navigator.languages.find((lang) =>
         supportedLanguages.includes(lang.slice(0, 2)),
-      )) !== null
+      )) != null
     ) {
       // e.g. "en-US" --> "en"
       console.log(
           `getLangClientSide: setting language to "${browserPreference}" based on client's browser's language preference.`,
       )
-      lang = browserPreference
+      lang = browserPreference.slice(0, 2)
     }
     // 4. Falling back to default language ("en")
     else {
@@ -93,11 +91,10 @@ export async function getLangClientSide() {
     window.sessionStorage.lang = lang
     return lang
   } else {
-    // (If environment isn't client's, falling back to default language ("en") and returning that)
-    console.log(
-        "getLangClientSide: environment not client's. Setting language to \"en\".",
+    // (If environment isn't client's, throw an error)
+    throw new Error(
+        "getLangClientSide() was called in an environment that isn't the client's.",
     )
-    return "en"
   }
 }
 
