@@ -91,22 +91,7 @@ class _app extends __app {
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles)
     }
-    // 2. Check if client has allowed cookies
-    if (!this.state.globalAppState.cookieConsent) {
-      getCookieConsentClientSide()
-          .then((cookieConsent) => {
-            if (cookieConsent == null) {
-              return this.setState((prevState) => ({
-                ...prevState,
-                globalAppState: {...prevState.globalAppState, cookieConsent},
-              }))
-            } else if (cookieConsent === true) {
-              return this.setCookieConsent(cookieConsent)
-            }
-          })
-          .catch((error) => console.error(error.stack))
-    }
-    // 3. Set language client side
+    // 2. Set language client side
     const {
       languages: supportedLanguages,
       lang: serverSideLang,
@@ -124,6 +109,23 @@ class _app extends __app {
           }
         })
         .catch((error) => console.error(error.stack))
+    // 3. Check theme client side
+    // TODO: implement theme check client-side!
+    // 4. Check if client has allowed cookies
+    if (!this.state.globalAppState.cookieConsent) {
+      getCookieConsentClientSide()
+          .then((cookieConsent) => {
+            if (cookieConsent == null) {
+              return this.setState((prevState) => ({
+                ...prevState,
+                globalAppState: {...prevState.globalAppState, cookieConsent},
+              }))
+            } else if (cookieConsent === true) {
+              return this.setCookieConsent(cookieConsent)
+            }
+          })
+          .catch((error) => console.error(error.stack))
+    }
   }
 
   setCookieConsent(cookieConsent) {
