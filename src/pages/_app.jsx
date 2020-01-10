@@ -6,9 +6,11 @@ import CookieConsentSnackbar from "components/misc/cookie-consent-snackbar"
 
 import {ThemeProvider} from "@material-ui/core/styles"
 import {StringsProvider} from "contexts/strings"
+import {GlobalAppStateProvider} from "contexts/global-app-state"
 
 import makeTheme from "contexts/theme/makeTheme"
 import makeStrings from "contexts/strings/makeStrings"
+import makeGlobalAppState from "contexts/global-app-state/makeGlobalAppState"
 
 import {getThemeTypeServerSide} from "util/theme"
 import {
@@ -38,7 +40,11 @@ class _app extends __app {
      * - makeTheme() is synchronous and cannot be run server-side due to it's return value not being serializable
      *   and the "official" MUI + Next.js integration presuming that it's run client-side.
      */
-    this.state = {strings, theme: makeTheme(themeType)}
+    this.state = {
+      strings,
+      theme: makeTheme(themeType),
+      globalAppState: makeGlobalAppState(dehydratedAppState),
+    }
   }
 
   static async getInitialProps({Component, ctx}) {
@@ -116,7 +122,7 @@ class _app extends __app {
       Component,
       pageProps: {pageProps},
     } = this.props
-    const {strings, theme, showCCS} = this.state
+    const {strings, theme, globalAppState, showCCS} = this.state
     return (
       <>
         <Head>
@@ -126,14 +132,16 @@ class _app extends __app {
           {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
           <CssBaseline />
           <StringsProvider strings={strings}>
-            <Header />
-            <main style={{padding: theme.spacing(3)}}>
-              <Component {...pageProps} />
-            </main>
-            <CookieConsentSnackbar
-              show={!!showCCS}
-              setCookieConsent={this.setCookieConsent.bind(this)}
-            />
+            <GlobalAppStateProvider globalAppState={globalAppState}>
+              <Header />
+              <main style={{padding: theme.spacing(3)}}>
+                <Component {...pageProps} />
+              </main>
+              <CookieConsentSnackbar
+                show={!!showCCS}
+                setCookieConsent={this.setCookieConsent.bind(this)}
+              />
+            </GlobalAppStateProvider>
           </StringsProvider>
         </ThemeProvider>
       </>
