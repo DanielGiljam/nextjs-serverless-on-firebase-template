@@ -2,15 +2,15 @@ import ListItemText from "@material-ui/core/ListItemText"
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction"
 import Button from "@material-ui/core/Button"
 
-import useStrings from "resources/strings/useStrings"
+import useStrings from "contexts/strings/useStrings"
 import {useEffect, useState} from "react"
 
 import {
   getCookieConsentClientSide,
   setCookieConsentClientSide,
-} from "utility/cookie-consent"
+} from "util/cookies"
 
-import parseCookies from "utility/parse-cookies"
+import parseCookies from "util/cookies/parse-cookies"
 
 function CookieConsent() {
   const strings = useStrings().header.preferences.cookieConsent

@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import Button from "@material-ui/core/Button"
 import Snackbar from "@material-ui/core/Snackbar"
 
-import useStrings from "resources/strings/useStrings"
+import useStrings from "contexts/strings/useStrings"
 
 function CookieConsentSnackbar({show, setCookieConsent}) {
   const strings = useStrings()

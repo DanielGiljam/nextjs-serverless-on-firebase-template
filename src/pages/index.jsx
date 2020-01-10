@@ -1,6 +1,6 @@
 import Typography from "@material-ui/core/Typography"
 
-import useStrings from "resources/strings/useStrings"
+import useStrings from "contexts/strings/useStrings"
 
 function Index() {
   const strings = useStrings()

@@ -1,5 +1,5 @@
-import parseCookies from "utility/parse-cookies"
-import serializeCookies from "utility/serialize-cookies"
+import parseCookies from "./parse-cookies"
+import serializeCookies from "./serialize-cookies"
 
 export async function getCookieConsentClientSide(cookies) {
   if (typeof window !== "undefined" && typeof navigator !== "undefined") {

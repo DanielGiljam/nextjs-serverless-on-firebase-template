@@ -7,7 +7,7 @@ import IconButton from "@material-ui/core/IconButton"
 import SettingsRoundedIcon from "@material-ui/icons/SettingsRounded"
 import Preferences from "./preferences"
 
-import useStrings from "resources/strings/useStrings"
+import useStrings from "contexts/strings/useStrings"
 import {useState} from "react"
 
 function Header() {

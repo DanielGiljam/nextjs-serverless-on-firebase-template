@@ -5,23 +5,23 @@ import Header from "components/header"
 import CookieConsentSnackbar from "components/misc/cookie-consent-snackbar"
 
 import {ThemeProvider} from "@material-ui/core/styles"
-import {StringsProvider} from "resources/strings"
+import {StringsProvider} from "contexts/strings"
 
-import makeStrings from "resources/strings/makeStrings"
-import makeTheme from "resources/theme/makeTheme"
+import makeTheme from "contexts/theme/makeTheme"
+import makeStrings from "contexts/strings/makeStrings"
 
+import {getThemeTypeServerSide} from "util/theme"
 import {
   getLangServerSide,
   getLangClientSide,
   extendStringClass,
-} from "resources/strings/functions"
-import {getThemeTypeServerSide} from "resources/theme/functions"
+} from "util/strings"
 import {
   getCookieConsentClientSide,
   setCookieConsentClientSide,
-} from "utility/cookie-consent"
+} from "util/cookies"
 
-import parseCookies from "utility/parse-cookies"
+import parseCookies from "util/cookies/parse-cookies"
 
 /*
  * Material-UI integration achieved thanks to this example: https://github.com/mui-org/material-ui/tree/master/examples/nextjs 2019-09-13
