@@ -165,10 +165,7 @@ class _app extends __app {
               <main style={{padding: theme.spacing(3)}}>
                 <Component {...pageProps} />
               </main>
-              <CookieConsentSnackbar
-                show={globalAppState.cookieConsent == null}
-                setCookieConsent={globalAppState.setCookieConsent}
-              />
+              <CookieConsentSnackbar />
             </GlobalAppStateProvider>
           </StringsProvider>
         </ThemeProvider>

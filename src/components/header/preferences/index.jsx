@@ -4,7 +4,10 @@ import Menu from "@material-ui/core/Menu"
 import MenuItem from "@material-ui/core/MenuItem"
 import CookieConsent from "./cookie-consent"
 
+import useGlobalAppState from "contexts/global-app-state/useGlobalAppState"
+
 function Preferences({anchor, setAnchor}) {
+  const {cookieConsent, setCookieConsent} = useGlobalAppState()
   return (
     <Menu
       id={"preferences"}
@@ -14,7 +17,10 @@ function Preferences({anchor, setAnchor}) {
       keepMounted
     >
       <MenuItem>
-        <CookieConsent />
+        <CookieConsent
+          cookieConsent={cookieConsent}
+          setCookieConsent={setCookieConsent}
+        />
       </MenuItem>
     </Menu>
   )
