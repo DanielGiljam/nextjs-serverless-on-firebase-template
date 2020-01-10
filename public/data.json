@@ -1,11 +1,4 @@
 {
-  "languages": [
-    "en",
-    "sv",
-    "fi"
-  ],
-  "themeTypes": [
-    "light",
-    "dark"
-  ]
+  "languages": ["en", "sv", "fi"],
+  "themes": ["auto", "light", "dark"]
 }

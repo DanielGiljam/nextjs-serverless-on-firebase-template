@@ -1,9 +1,4 @@
-export async function getThemeTypeServerSide(cookies) {
-  const supportedThemeTypes = (
-    await fetch(`${process.env.ASSET_PREFIX}/data.json`).then((res) =>
-      res.json(),
-    )
-  ).themeTypes
+export async function getThemeTypeServerSide(supportedThemeTypes, cookies) {
   console.log(
       "getThemeTypeServerSide: supported theme types:",
       supportedThemeTypes,

@@ -21,6 +21,7 @@ import {
   setCookieConsentClientSide,
 } from "util/cookies"
 
+import fetch from "isomorphic-unfetch"
 import parseCookies from "util/cookies/parse-cookies"
 
 /*
@@ -31,7 +32,7 @@ class _app extends __app {
   constructor(props) {
     super(props)
     extendStringClass()
-    const {strings, themeType} = props.pageProps.appProps
+    const {strings, themeType, dehydratedAppState} = props.pageProps.appProps
     /* NOTE: makeStrings() vs makeTheme():
      * - makeStrings() is asynchronous and gives by performance benefit by being run server-side.
      * - makeTheme() is synchronous and cannot be run server-side due to it's return value not being serializable
@@ -54,12 +55,19 @@ class _app extends __app {
   }
 
   static async getInitialPropsServer({req, res}) {
+    const dehydratedAppState = await fetch(
+        `${process.env.ASSET_PREFIX}/data.json`,
+    ).then((res) => res.json())
     const cookies = parseCookies(req.headers["cookie"])
-    const lang = await getLangServerSide(
+    const lang = (dehydratedAppState.lang = await getLangServerSide(
+        dehydratedAppState.languages,
         cookies,
         req.headers["accept-language"],
-    )
-    const themeType = await getThemeTypeServerSide(cookies)
+    ))
+    const themeType = (dehydratedAppState.theme = await getThemeTypeServerSide(
+        dehydratedAppState.themes,
+        cookies,
+    ))
     if (cookies["cookie-consent"] === "true") {
       // TODO: be more verbose about setting cookies!
       // TODO: implement expiration timestamps for cookies that are set!
@@ -70,7 +78,7 @@ class _app extends __app {
      * - makeTheme() is synchronous and cannot be run server-side due to it's return value not being serializable
      *   and the "official" MUI + Next.js integration presuming that it's run client-side
      */
-    return {strings: await makeStrings(lang), themeType}
+    return {strings: await makeStrings(lang), themeType, dehydratedAppState}
   }
 
   componentDidMount() {

@@ -1,9 +1,4 @@
-export async function getLangServerSide(cookies, acceptLanguageHeader) {
-  const supportedLanguages = (
-    await fetch(`${process.env.ASSET_PREFIX}/data.json`).then((res) =>
-      res.json(),
-    )
-  ).languages
+export async function getLangServerSide(supportedLanguages, cookies, acceptLanguageHeader) {
   console.log("getLangServerSide: supported languages:", supportedLanguages)
   if (cookies && cookies.lang) {
     console.log("getLangServerSide: found a language cookie:", {
