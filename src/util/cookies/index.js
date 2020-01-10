@@ -1,6 +1,10 @@
 import parseCookies from "./parse-cookies"
 import serializeCookies from "./serialize-cookies"
 
+export async function getCookieConsentServerSide(cookies) {
+  return parseCookieConsent(cookies["cookie-consent"])
+}
+
 export async function getCookieConsentClientSide(cookies) {
   if (typeof window !== "undefined" && typeof navigator !== "undefined") {
     // 1. Reading localStorage
@@ -29,48 +33,40 @@ export async function getCookieConsentClientSide(cookies) {
   }
 }
 
-export async function setCookieConsentClientSide(cookieConsent) {
-  if (typeof window !== "undefined" && typeof navigator !== "undefined") {
-    if (typeof cookieConsent !== "boolean") {
-      throw new TypeError(
-          "cookieConsent parameter provided to setCookieConsentClientSide() must be a boolean!",
-      )
-    }
-    console.log(
-        `setCookieConsentClientSide: setting cookie consent to "${cookieConsent}"...`,
-    )
-    const oldCookieConsent = parseCookieConsent(
-        window.localStorage.cookieConsent,
-    )
-    window.localStorage.cookieConsent = cookieConsent
-    console.log(
-        "setCookieConsentClientSide: added cookie consent to localStorage:",
-        {cookieConsent},
-    )
-    if (cookieConsent) {
-      const cookies = parseCookies(document.cookie)
-      console.log("setCookieConsentClientSide: parsed cookies:", cookies)
-      cookies["cookie-consent"] = cookieConsent
-      console.log(
-          "setCookieConsentClientSide: adding cookie consent to parsed cookies:",
-          {
-            "cookie-consent": cookieConsent,
-          },
-      )
-      const serializedCookies = (document.cookie = serializeCookies(cookies))
-      console.log(
-          "setCookieConsentClientSide: serialized cookies:",
-          serializedCookies,
-      )
-    } else if (oldCookieConsent) {
-      console.log("setCookieConsentClientSide: purging all existing cookies...")
-      document.cookie = "" // TODO: this doesn't purge cookies. Find a working solution!
-    }
-  } else {
-    throw new Error(
-        "setCookieConsentClientSide() was called in an environment that isn't the client's.",
+export async function setCookieConsent(cookieConsent) {
+  if (typeof cookieConsent !== "boolean") {
+    throw new TypeError(
+        "cookieConsent parameter provided to setCookieConsent() must be a boolean!",
     )
   }
+  console.log(
+      `setCookieConsent: setting cookie consent to "${cookieConsent}"...`,
+  )
+  const oldCookieConsent = parseCookieConsent(window.localStorage.cookieConsent)
+  window.localStorage.cookieConsent = cookieConsent
+  console.log("setCookieConsent: added cookie consent to localStorage:", {
+    cookieConsent,
+  })
+  if (cookieConsent) {
+    const cookies = parseCookies(document.cookie)
+    console.log("setCookieConsent: parsed cookies:", cookies)
+    cookies["cookie-consent"] = cookieConsent
+    console.log("setCookieConsent: adding cookie consent to parsed cookies:", {
+      "cookie-consent": cookieConsent,
+    })
+    const serializedCookies = (document.cookie = serializeCookies(cookies))
+    console.log("setCookieConsent: serialized cookies:", serializedCookies)
+    return true
+  } else if (oldCookieConsent) {
+    console.log("setCookieConsent: purging all existing cookies...")
+    document.cookie = "" // TODO: this doesn't purge cookies. Find a working solution!
+    return false
+  }
+}
+
+export async function setCookies() {
+  // TODO: implement setCookies()!
+  console.log("setCookies() isn't implemented yet!")
 }
 
 function parseCookieConsent(cookieConsentString) {

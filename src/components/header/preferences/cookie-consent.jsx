@@ -5,32 +5,29 @@ import Button from "@material-ui/core/Button"
 import useStrings from "contexts/strings/useStrings"
 import {useEffect, useState} from "react"
 
-import {
-  getCookieConsentClientSide,
-  setCookieConsentClientSide,
-} from "util/cookies"
+import {getCookieConsentClientSide, setCookieConsent} from "util/cookies"
 
 import parseCookies from "util/cookies/parse-cookies"
 
 function CookieConsent() {
   const strings = useStrings().header.preferences.cookieConsent
-  const [cookieConsent, setCookieConsent] = useState(false)
+  const [localCookieConsentState, setLocalCookieConsentState] = useState(false)
   // TODO: get cookie consent (and other preferences) from a context!
   useEffect(() => {
     getCookieConsentClientSide(parseCookies(document.cookie))
         .then((cookieConsent) => {
-          if (cookieConsent) setCookieConsent(cookieConsent)
+          if (cookieConsent) setLocalCookieConsentState(cookieConsent)
         })
         .catch((error) => console.error(error.stack))
   }, [])
   function setCookieConsentPositive() {
-    setCookieConsentClientSide(true)
-        .then(() => setCookieConsent(true))
+    setCookieConsent(true)
+        .then(() => setLocalCookieConsentState(true))
         .catch((error) => console.error(error.stack))
   }
   function setCookieConsentNegative() {
-    setCookieConsentClientSide(false)
-        .then(() => setCookieConsent(false))
+    setCookieConsent(false)
+        .then(() => setLocalCookieConsentState(false))
         .catch((error) => console.error(error.stack))
   }
   return (
@@ -39,16 +36,22 @@ function CookieConsent() {
       <ListItemText
         primary={strings.label}
         secondary={
-          cookieConsent ? strings.state.positive : strings.state.negative
+          localCookieConsentState ?
+            strings.state.positive :
+            strings.state.negative
         }
       />
       <ListItemSecondaryAction>
         <Button
           onClick={
-            cookieConsent ? setCookieConsentNegative : setCookieConsentPositive
+            localCookieConsentState ?
+              setCookieConsentNegative :
+              setCookieConsentPositive
           }
         >
-          {cookieConsent ? strings.action.negative : strings.action.positive}
+          {localCookieConsentState ?
+            strings.action.negative :
+            strings.action.positive}
         </Button>
       </ListItemSecondaryAction>
     </>

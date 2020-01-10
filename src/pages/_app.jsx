@@ -19,8 +19,10 @@ import {
   extendStringClass,
 } from "util/strings"
 import {
+  getCookieConsentServerSide,
   getCookieConsentClientSide,
-  setCookieConsentClientSide,
+  setCookieConsent,
+  setCookies,
 } from "util/cookies"
 
 import fetch from "isomorphic-unfetch"
@@ -74,11 +76,8 @@ class _app extends __app {
         dehydratedAppState.themes,
         cookies,
     ))
-    if (cookies["cookie-consent"] === "true") {
-      // TODO: be more verbose about setting cookies!
-      // TODO: implement expiration timestamps for cookies that are set!
-      res.setHeader("Set-Cookie", [`lang=${lang}`, `theme-type=${themeType}`])
-    }
+    const cookieConsent = await getCookieConsentServerSide(cookies)
+    if (cookieConsent != null) dehydratedAppState.cookieConsent = cookieConsent
     /* NOTE: makeStrings() vs makeTheme():
      * - makeStrings() is asynchronous and gives by performance benefit by being run server-side
      * - makeTheme() is synchronous and cannot be run server-side due to it's return value not being serializable
@@ -112,8 +111,17 @@ class _app extends __app {
   }
 
   setCookieConsent(cookieConsent) {
-    setCookieConsentClientSide(cookieConsent)
-        .then(() => this.setState({showCCS: false}))
+    setCookieConsent(cookieConsent)
+        .then((cookieConsent) => {
+          if (cookieConsent) {
+            const {lang, theme} = this.state.globalAppState
+            setCookies(lang, theme).catch((error) => console.error(error.stack))
+          }
+          return this.setState((prevState) => ({
+            ...prevState,
+            globalAppState: {...prevState.globalAppState, cookieConsent},
+          }))
+        })
         .catch((error) => console.error(error.stack))
   }
 
