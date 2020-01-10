@@ -5,7 +5,7 @@ export async function getCookieConsentServerSide(cookies) {
   return cookies["cookie-consent"] === true
 }
 
-export async function getCookieConsentClientSide(cookies) {
+export async function getCookieConsentClientSide() {
   if (typeof window !== "undefined" && typeof navigator !== "undefined") {
     // 1. Reading localStorage
     const local = parseCookieConsent(window.localStorage.cookieConsent)
@@ -14,14 +14,6 @@ export async function getCookieConsentClientSide(cookies) {
           `getCookieConsentClientSide: setting cookie consent to "${local}" based on item in localStorage.`,
       )
       return local
-    }
-    // 2. Reading "cookie-consent" cookie
-    const cookie = parseCookieConsent(cookies["cookie-consent"])
-    if (cookie != null) {
-      console.log(
-          `getCookieConsentClientSide: setting cookie consent to "${cookie}" based on cookie.`,
-      )
-      return cookie
     }
     // 3. Returning that cookie consent isn't true nor false
     return null

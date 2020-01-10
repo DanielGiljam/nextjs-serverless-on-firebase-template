@@ -91,24 +91,36 @@ class _app extends __app {
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles)
     }
-    // (Parse cookies as they are read from in the following steps)
-    const cookies = parseCookies(document.cookie)
     // 2. Check if client has allowed cookies
-    getCookieConsentClientSide(cookies)
-        .then((cookieConsent) => {
-          if (cookieConsent == null) {
-            return this.setState((prevState) => ({
-              ...prevState,
-              globalAppState: {...prevState.globalAppState, cookieConsent},
-            }))
-          }
-        })
-        .catch((error) => console.error(error.stack))
+    if (!this.state.globalAppState.cookieConsent) {
+      getCookieConsentClientSide()
+          .then((cookieConsent) => {
+            if (cookieConsent == null) {
+              return this.setState((prevState) => ({
+                ...prevState,
+                globalAppState: {...prevState.globalAppState, cookieConsent},
+              }))
+            } else if (cookieConsent === true) {
+              return this.setCookieConsent(cookieConsent)
+            }
+          })
+          .catch((error) => console.error(error.stack))
+    }
     // 3. Set language client side
-    getLangClientSide(cookies)
+    const {
+      languages: supportedLanguages,
+      lang: serverSideLang,
+    } = this.state.globalAppState
+    getLangClientSide(supportedLanguages, serverSideLang)
         .then((lang) => {
-          if (lang !== this.state.strings.lang) {
-            makeStrings(lang).then((strings) => this.setState({strings}))
+          if (lang !== serverSideLang) {
+            return makeStrings(lang).then((strings) =>
+              this.setState((prevState) => ({
+                ...prevState,
+                strings,
+                globalAppState: {...prevState.globalAppState, lang},
+              })),
+            )
           }
         })
         .catch((error) => console.error(error.stack))
@@ -118,8 +130,10 @@ class _app extends __app {
     setCookieConsent(cookieConsent)
         .then((cookieConsent) => {
           if (cookieConsent) {
-            const {lang, theme} = this.state.globalAppState
-            setCookies(lang, theme).catch((error) => console.error(error.stack))
+            const {lang, theme: themeType} = this.state.globalAppState
+            setCookies(lang, themeType).catch((error) =>
+              console.error(error.stack),
+            )
           }
           return this.setState((prevState) => ({
             ...prevState,

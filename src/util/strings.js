@@ -1,4 +1,8 @@
-export async function getLangServerSide(supportedLanguages, cookies, acceptLanguageHeader) {
+export async function getLangServerSide(
+    supportedLanguages,
+    cookies,
+    acceptLanguageHeader,
+) {
   console.log("getLangServerSide: supported languages:", supportedLanguages)
   if (cookies && cookies.lang) {
     console.log("getLangServerSide: found a language cookie:", {
@@ -24,7 +28,7 @@ export async function getLangServerSide(supportedLanguages, cookies, acceptLangu
   return "en"
 }
 
-export async function getLangClientSide(cookies) {
+export async function getLangClientSide(supportedLanguages, serverSideLang) {
   if (typeof window !== "undefined" && typeof navigator !== "undefined") {
     // 1. Reading localStorage
     const local = window.localStorage.lang
@@ -42,27 +46,10 @@ export async function getLangClientSide(cookies) {
       )
       return session
     }
-    // (Fetching a list of supported languages to check against, as the following sources may specify unsupported languages)
-    const supportedLanguages = (
-      await fetch(`${process.env.ASSET_PREFIX}/data.json`).then((res) =>
-        res.json(),
-      )
-    ).languages
-    let lang = "en"
-    let cookie
+    let lang = serverSideLang
     let browserPreference
-    // 3. Reading "lang" cookie
-    if (
-      (cookie = cookies.lang) != null &&
-      supportedLanguages.includes(cookie.slice(0, 2))
-    ) {
-      console.log(
-          `getLangClientSide: setting language to "${cookie}" based on cookie.`,
-      )
-      lang = cookie.slice(0, 2)
-    }
     // 3. Reading browser's language preferences
-    else if (
+    if (
       (browserPreference = navigator.languages.find((lang) =>
         supportedLanguages.includes(lang.slice(0, 2)),
       )) != null
@@ -72,12 +59,6 @@ export async function getLangClientSide(cookies) {
           `getLangClientSide: setting language to "${browserPreference}" based on client's browser's language preference.`,
       )
       lang = browserPreference.slice(0, 2)
-    }
-    // 4. Falling back to default language ("en")
-    else {
-      console.log(
-          "getLangClientSide: setting language to \"en\" based on nothing.",
-      )
     }
     // (Returning the result + populating sessionStorage.lang with the result)
     console.log(
