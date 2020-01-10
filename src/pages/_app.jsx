@@ -42,7 +42,7 @@ class _app extends __app {
 
   static async getInitialProps({Component, ctx}) {
     const appProps =
-      ctx.req && ctx.res ? await this.getInitialPropsServer(ctx) : {}
+      ctx.req && ctx.res ? await this.getInitialPropsServer(ctx) : null
     let pageProps = {}
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
@@ -50,7 +50,7 @@ class _app extends __app {
     /* NOTE: The practice of returning everything inside the "pageProps" property of an object
      * is because Next.js expects the return value to look like that (the code would break otherwise).
      */
-    return {pageProps: {appProps, ...pageProps}}
+    return {pageProps: {appProps, pageProps}}
   }
 
   static async getInitialPropsServer({req, res}) {
@@ -106,7 +106,7 @@ class _app extends __app {
   render() {
     const {
       Component,
-      pageProps: {appProps, ...pageProps},
+      pageProps: {pageProps},
     } = this.props
     const {strings, theme, showCCS} = this.state
     return (
