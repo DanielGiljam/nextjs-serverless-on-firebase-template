@@ -76,9 +76,7 @@ class _app extends __app {
         dehydratedAppState.themes,
         cookies,
     ))
-    const cookieConsent = await getCookieConsentServerSide(cookies)
-    dehydratedAppState.cookieConsent =
-      cookieConsent != null ? cookieConsent : false
+    dehydratedAppState.cookieConsent = await getCookieConsentServerSide(cookies)
     /* NOTE: makeStrings() vs makeTheme():
      * - makeStrings() is asynchronous and gives by performance benefit by being run server-side
      * - makeTheme() is synchronous and cannot be run server-side due to it's return value not being serializable

@@ -2,7 +2,7 @@ import parseCookies from "./parse-cookies"
 import serializeCookies from "./serialize-cookies"
 
 export async function getCookieConsentServerSide(cookies) {
-  return parseCookieConsent(cookies["cookie-consent"])
+  return cookies["cookie-consent"] === true
 }
 
 export async function getCookieConsentClientSide(cookies) {
