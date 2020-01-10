@@ -57,11 +57,12 @@ export async function setCookieConsent(cookieConsent) {
     const serializedCookies = (document.cookie = serializeCookies(cookies))
     console.log("setCookieConsent: serialized cookies:", serializedCookies)
     return true
-  } else if (oldCookieConsent) {
+  }
+  if (oldCookieConsent) {
     console.log("setCookieConsent: purging all existing cookies...")
     document.cookie = "" // TODO: this doesn't purge cookies. Find a working solution!
-    return false
   }
+  return false
 }
 
 export async function setCookies() {

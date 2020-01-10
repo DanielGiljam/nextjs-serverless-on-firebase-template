@@ -45,7 +45,7 @@ class _app extends __app {
     this.state = {
       strings,
       theme: makeTheme(themeType),
-      globalAppState: makeGlobalAppState(dehydratedAppState),
+      globalAppState: makeGlobalAppState(dehydratedAppState, this),
     }
   }
 
@@ -77,7 +77,8 @@ class _app extends __app {
         cookies,
     ))
     const cookieConsent = await getCookieConsentServerSide(cookies)
-    if (cookieConsent != null) dehydratedAppState.cookieConsent = cookieConsent
+    dehydratedAppState.cookieConsent =
+      cookieConsent != null ? cookieConsent : false
     /* NOTE: makeStrings() vs makeTheme():
      * - makeStrings() is asynchronous and gives by performance benefit by being run server-side
      * - makeTheme() is synchronous and cannot be run server-side due to it's return value not being serializable
@@ -97,7 +98,12 @@ class _app extends __app {
     // 2. Check if client has allowed cookies
     getCookieConsentClientSide(cookies)
         .then((cookieConsent) => {
-          if (cookieConsent == null) this.setState({showCCS: true})
+          if (cookieConsent == null) {
+            return this.setState((prevState) => ({
+              ...prevState,
+              globalAppState: {...prevState.globalAppState, cookieConsent},
+            }))
+          }
         })
         .catch((error) => console.error(error.stack))
     // 3. Set language client side
@@ -130,7 +136,7 @@ class _app extends __app {
       Component,
       pageProps: {pageProps},
     } = this.props
-    const {strings, theme, globalAppState, showCCS} = this.state
+    const {strings, theme, globalAppState} = this.state
     return (
       <>
         <Head>
@@ -146,8 +152,8 @@ class _app extends __app {
                 <Component {...pageProps} />
               </main>
               <CookieConsentSnackbar
-                show={!!showCCS}
-                setCookieConsent={this.setCookieConsent.bind(this)}
+                show={globalAppState.cookieConsent == null}
+                setCookieConsent={globalAppState.setCookieConsent}
               />
             </GlobalAppStateProvider>
           </StringsProvider>
