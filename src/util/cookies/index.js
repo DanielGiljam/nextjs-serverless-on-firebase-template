@@ -1,3 +1,8 @@
+import setCookie from "./set-cookie"
+import parseCookies from "./parse-cookies"
+import parseCookieConsent from "./parse-cookie-consent"
+import purgeCookies from "./purge-cookies"
+
 export async function getCookieConsentServerSide(cookies) {
   return cookies["cookie-consent"] === true
 }
@@ -80,40 +85,4 @@ export async function setCookies(cookies) {
   console.log("setCookies: resulting cookies:", {
     resultingCookies: document.cookie,
   })
-}
-
-export function setCookie(key, value) {
-  document.cookie = `${key}=${value};max-age=31536000` // 31 536 000 seconds = 1 year
-}
-
-export function parseCookies(cookieString) {
-  const parsedCookies = {}
-  const regExp = /([^=]+)=([^;,]+)(?:[;,] ?)?/g
-  let array
-  while ((array = regExp.exec(cookieString)) !== null) {
-    parsedCookies[array[1]] = array[2]
-  }
-  return parsedCookies
-}
-
-function parseCookieConsent(cookieConsentString) {
-  switch (cookieConsentString) {
-    case "true":
-      return true
-    case "false":
-      return false
-    default:
-      return null
-  }
-}
-
-function purgeCookies(cookies) {
-  const cookieKeys = Object.keys(cookies)
-  if (cookieKeys.length) {
-    const expiryDate = new Date(0).toUTCString()
-    for (const cookieKey of cookieKeys) {
-      document.cookie = `${cookieKey}=${cookies[cookieKey]};expires=${expiryDate}`
-    }
-    console.log("purgeCookies: cookies that were purged:", cookies)
-  }
 }

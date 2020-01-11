@@ -23,10 +23,10 @@ import {
   getCookieConsentClientSide,
   setCookieConsent,
   setCookies,
-  parseCookies,
 } from "util/cookies"
 
 import fetch from "isomorphic-unfetch"
+import parseCookies from "util/cookies/parse-cookies"
 
 /*
  * Material-UI integration achieved thanks to this example: https://github.com/mui-org/material-ui/tree/master/examples/nextjs 2019-09-13
