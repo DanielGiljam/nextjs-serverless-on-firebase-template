@@ -16,7 +16,7 @@ function Preferences({anchor, setAnchor}) {
       anchorEl={anchor}
       keepMounted
     >
-      <MenuItem>
+      <MenuItem button={false} style={{outline: "none"}}>
         <CookieConsent
           cookieConsent={cookieConsent}
           setCookieConsent={setCookieConsent}
