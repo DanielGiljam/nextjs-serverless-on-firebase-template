@@ -37,10 +37,13 @@ class _app extends __app {
     super(props)
     extendStringClass()
     const {strings, themeType, dehydratedAppState} = props.pageProps.appProps
-    /* NOTE: makeStrings() vs makeTheme():
-     * - makeStrings() is asynchronous and gives by performance benefit by being run server-side.
-     * - makeTheme() is synchronous and cannot be run server-side due to it's return value not being serializable
-     *   and the "official" MUI + Next.js integration presuming that it's run client-side.
+    /* NOTE: makeStrings() vs makeTheme() vs makeGlobalAppState():
+     * - makeStrings() provides a performance boost from a UX point of view if it runs server-side.
+     * - makeTheme() cannot be run server-side due to it's return value not being serializable. (The return value from
+     *   getInitialProps is always serialized. See https://nextjs.org/docs/api-reference/data-fetching/getInitialProps.)
+     * - makeGlobalAppState() makes and returns an object that is heavily tied to the instantiated _app -component's
+     *   state on the client-side, so as an obvious consequence it cannot be serialized and the function can't run
+     *   server-side.
      */
     this.state = {
       strings,
@@ -77,10 +80,13 @@ class _app extends __app {
         cookies,
     ))
     dehydratedAppState.cookieConsent = await getCookieConsentServerSide(cookies)
-    /* NOTE: makeStrings() vs makeTheme():
-     * - makeStrings() is asynchronous and gives by performance benefit by being run server-side
-     * - makeTheme() is synchronous and cannot be run server-side due to it's return value not being serializable
-     *   and the "official" MUI + Next.js integration presuming that it's run client-side
+    /* NOTE: makeStrings() vs makeTheme() vs makeGlobalAppState():
+     * - makeStrings() provides a performance boost from a UX point of view if it runs server-side.
+     * - makeTheme() cannot be run server-side due to it's return value not being serializable. (The return value from
+     *   getInitialProps is always serialized. See https://nextjs.org/docs/api-reference/data-fetching/getInitialProps.)
+     * - makeGlobalAppState() makes and returns an object that is heavily tied to the instantiated _app -component's
+     *   state on the client-side, so as an obvious consequence it cannot be serialized and the function can't run
+     *   server-side.
      */
     return {strings: await makeStrings(lang), themeType, dehydratedAppState}
   }
