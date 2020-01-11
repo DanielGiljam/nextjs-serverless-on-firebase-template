@@ -4,7 +4,7 @@ import parseCookieConsent from "./parse-cookie-consent"
 import purgeCookies from "./purge-cookies"
 
 export async function getCookieConsentServerSide(cookies) {
-  return cookies["cookie-consent"] === true
+  return cookies["cookie-consent"] === "true"
 }
 
 export async function getCookieConsentClientSide() {
