@@ -23,10 +23,10 @@ import {
   getCookieConsentClientSide,
   setCookieConsent,
   setCookies,
+  parseCookies,
 } from "util/cookies"
 
 import fetch from "isomorphic-unfetch"
-import parseCookies from "util/cookies/parse-cookies"
 
 /*
  * Material-UI integration achieved thanks to this example: https://github.com/mui-org/material-ui/tree/master/examples/nextjs 2019-09-13
@@ -130,17 +130,23 @@ class _app extends __app {
 
   setCookieConsent(cookieConsent) {
     setCookieConsent(cookieConsent)
-        .then((cookieConsent) => {
-          if (cookieConsent) {
-            const {lang, theme: themeType} = this.state.globalAppState
-            setCookies(lang, themeType).catch((error) =>
-              console.error(error.stack),
-            )
-          }
-          return this.setState((prevState) => ({
+        .then(() =>
+          this.setState((prevState) => ({
             ...prevState,
             globalAppState: {...prevState.globalAppState, cookieConsent},
-          }))
+          })),
+        )
+        .then(() => {
+          if (cookieConsent) {
+            const {lang, theme, cookieConsent} = this.state.globalAppState
+            return setCookies({
+              "lang": lang,
+              "theme-type": theme,
+              "cookie-consent": cookieConsent.toString(),
+            })
+          } else {
+            return setCookies({})
+          }
         })
         .catch((error) => console.error(error.stack))
   }

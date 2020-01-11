@@ -1,6 +1,3 @@
-import parseCookies from "./parse-cookies"
-import serializeCookies from "./serialize-cookies"
-
 export async function getCookieConsentServerSide(cookies) {
   return cookies["cookie-consent"] === true
 }
@@ -34,32 +31,69 @@ export async function setCookieConsent(cookieConsent) {
   console.log(
       `setCookieConsent: setting cookie consent to "${cookieConsent}"...`,
   )
-  const oldCookieConsent = parseCookieConsent(window.localStorage.cookieConsent)
   window.localStorage.cookieConsent = cookieConsent
   console.log("setCookieConsent: added cookie consent to localStorage:", {
-    cookieConsent,
+    cookieConsent: cookieConsent.toString(),
   })
-  if (cookieConsent) {
-    const cookies = parseCookies(document.cookie)
-    console.log("setCookieConsent: parsed cookies:", cookies)
-    cookies["cookie-consent"] = cookieConsent
-    console.log("setCookieConsent: adding cookie consent to parsed cookies:", {
-      "cookie-consent": cookieConsent,
-    })
-    const serializedCookies = (document.cookie = serializeCookies(cookies))
-    console.log("setCookieConsent: serialized cookies:", serializedCookies)
-    return true
-  }
-  if (oldCookieConsent) {
-    console.log("setCookieConsent: purging all existing cookies...")
-    document.cookie = "" // TODO: this doesn't purge cookies. Find a working solution!
-  }
-  return false
 }
 
-export async function setCookies() {
-  // TODO: implement setCookies()!
-  console.log("setCookies() isn't implemented yet!")
+export async function setCookies(cookies) {
+  console.log("setCookies: cookies that will be set:", cookies)
+  const existingCookies = parseCookies(document.cookie)
+  console.log("setCookies: existing cookies:", {
+    existingCookies: document.cookie,
+  })
+  let cookieValue
+  let existingCookieValue
+  for (const cookieKey of Object.keys(cookies)) {
+    // If a key exists in both existingCookies and in the cookies-object
+    // that was passed as an argument to this function, but the values don't match,
+    // then the corresponding cookie is reset with the value in the cookies-object.
+    // An appropriate message is logged about that.
+    if (
+      (cookieValue = cookies[cookieKey]) !==
+      (existingCookieValue = existingCookies[cookieKey])
+    ) {
+      if (existingCookieValue) {
+        console.log(
+            `setCookies: key "${cookieKey}" will be set from value "${existingCookieValue}" to value "${cookieValue}".`,
+        )
+      } else {
+        console.log(
+            `setCookies: key "${cookieKey}" will be set to value "${cookieValue}".`,
+        )
+      }
+      setCookie(cookieKey, cookieValue)
+    }
+    // Deleting every key in existingCookies that is also in the cookies-object
+    // that was passed as an argument to this function. This way existingCookies
+    // is virtually "remainingCookies" by the end of this loop.
+    if (!delete existingCookies[cookieKey]) {
+      // If a key deletion is unsuccessful, a warning is logged about that.
+      console.warn(
+          `setCookies: failed in operating on cookie "${cookieKey}"! As a result, it will be unset. Sorry!`,
+      )
+    }
+  }
+  // Purging all "cookies" that still remain in existingCookies
+  purgeCookies(existingCookies)
+  console.log("setCookies: resulting cookies:", {
+    resultingCookies: document.cookie,
+  })
+}
+
+export function setCookie(key, value) {
+  document.cookie = `${key}=${value};max-age=31536000` // 31 536 000 seconds = 1 year
+}
+
+export function parseCookies(cookieString) {
+  const parsedCookies = {}
+  const regExp = /([^=]+)=([^;,]+)(?:[;,] ?)?/g
+  let array
+  while ((array = regExp.exec(cookieString)) !== null) {
+    parsedCookies[array[1]] = array[2]
+  }
+  return parsedCookies
 }
 
 function parseCookieConsent(cookieConsentString) {
@@ -70,5 +104,16 @@ function parseCookieConsent(cookieConsentString) {
       return false
     default:
       return null
+  }
+}
+
+function purgeCookies(cookies) {
+  const cookieKeys = Object.keys(cookies)
+  if (cookieKeys.length) {
+    const expiryDate = new Date(0).toUTCString()
+    for (const cookieKey of cookieKeys) {
+      document.cookie = `${cookieKey}=${cookies[cookieKey]};expires=${expiryDate}`
+    }
+    console.log("purgeCookies: cookies that were purged:", cookies)
   }
 }
