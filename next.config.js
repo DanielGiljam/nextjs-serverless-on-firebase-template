@@ -1,3 +1,9 @@
+require("dotenv").config()
+
+if (!process.env.ASSET_PREFIX) {
+  throw new TypeError("process.env.ASSET_PREFIX is not defined!")
+}
+
 module.exports = {
   env: {
     // When loading static resources over the network in the Next.js app's/website's code,
