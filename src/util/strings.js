@@ -82,7 +82,6 @@ export function extendStringClass() {
   Object.defineProperties(String.prototype, {
     ucFirst: {configurable: true, value: ucFirst, writable: true},
     lcFirst: {configurable: true, value: lcFirst, writable: true},
-    capitalize: {configurable: true, value: capitalize, writable: true},
   })
 }
 
@@ -141,8 +140,4 @@ function ucFirst() {
 function lcFirst() {
   // eslint-disable-next-line no-invalid-this
   return this.replace(/^./, (match) => match.toLowerCase())
-}
-
-function capitalize(lang) {
-  // TODO: write capitalize() -function!
 }
