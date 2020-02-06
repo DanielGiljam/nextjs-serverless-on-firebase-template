@@ -12,7 +12,7 @@ import makeTheme from "contexts/theme/makeTheme"
 import makeStrings from "contexts/strings/makeStrings"
 import makeGlobalAppState from "contexts/global-app-state/makeGlobalAppState"
 
-import {getThemeTypeServerSide} from "util/theme"
+import {getThemeTypeServerSide, getThemeTypeClientSide} from "util/theme"
 import {
   getLangServerSide,
   getLangClientSide,
@@ -101,6 +101,7 @@ class _app extends __app {
     const {
       languages: supportedLanguages,
       lang: serverSideLang,
+      theme: serverSideThemeType,
     } = this.state.globalAppState
     getLangClientSide(supportedLanguages, serverSideLang)
         .then((lang) => {
@@ -116,7 +117,17 @@ class _app extends __app {
         })
         .catch((error) => console.error(error.stack))
     // 3. Check theme client side
-    // TODO: implement theme check client-side!
+    getThemeTypeClientSide()
+        .then((themeType) => {
+          if (themeType !== serverSideThemeType) {
+            return this.setState((prevState) => ({
+              ...prevState,
+              theme: makeTheme(themeType),
+              globalAppState: {...prevState.globalAppState, theme: themeType},
+            }))
+          }
+        })
+        .catch((error) => console.error(error.stack))
     // 4. Check if client has allowed cookies
     if (!this.state.globalAppState.cookieConsent) {
       getCookieConsentClientSide()
