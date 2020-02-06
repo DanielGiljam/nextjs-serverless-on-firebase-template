@@ -39,3 +39,22 @@ export async function getThemeTypeClientSide() {
     )
   }
 }
+
+export function getThemeTypeAuto() {
+  if (typeof window !== "undefined") {
+    if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+      console.log(
+          "getThemeTypeAuto: setting theme type to \"light\" based on client's browser's preference.",
+      )
+      return "light"
+    }
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      console.log(
+          "getThemeTypeAuto: setting theme type to \"dark\" based on client's browser's preference.",
+      )
+      return "dark"
+    }
+  }
+  // TODO: determine theme based on sunrise/sunset times!
+  return "light"
+}
