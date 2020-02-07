@@ -1,3 +1,5 @@
+import setCookie from "util/cookies/set-cookie"
+
 export async function getLangServerSide(
     supportedLanguages,
     cookies,
@@ -71,6 +73,25 @@ export async function getLangClientSide(supportedLanguages, serverSideLang) {
     throw new Error(
         "getLangClientSide() was called in an environment that isn't the client's.",
     )
+  }
+}
+
+export async function setLang(supportedLanguages, cookieConsent, lang) {
+  if (!supportedLanguages.includes(lang)) {
+    throw new TypeError(
+        "\"lang\" parameter provided to setLang() must be a supported language!",
+    )
+  }
+  console.log(`setLang: setting language to "${lang}"...`)
+  window.localStorage.lang = lang
+  console.log("setLang: added language to localStorage:", {
+    lang: lang.toString(),
+  })
+  if (cookieConsent) {
+    setCookie("lang", lang)
+    console.log("setLang: added language cookie:", {
+      lang: lang.toString(),
+    })
   }
 }
 
