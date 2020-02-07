@@ -1,4 +1,4 @@
-export function parseCookies(cookieString) {
+function parseCookies(cookieString) {
   const parsedCookies = {}
   const regExp = /([^=]+)=([^;,]+)(?:[;,] ?)?/g
   let array
