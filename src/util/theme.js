@@ -20,7 +20,7 @@ export async function getThemeTypeServerSide(supportedThemeTypes, cookies) {
 export async function getThemeTypeClientSide() {
   if (typeof window !== "undefined" && typeof navigator !== "undefined") {
     // 1. Reading localStorage
-    const local = window.localStorage.lang
+    const local = window.localStorage.themeType
     if (local) {
       console.log(
           `getThemeTypeClientSide: setting theme type to "${local}" based on item in localStorage.`,
@@ -28,9 +28,7 @@ export async function getThemeTypeClientSide() {
       return local
     }
     // 3. Returning theme type "auto" if no theme type was explicitly specified in localStorage
-    console.log(
-        "getThemeTypeClientSide: setting theme type to \"auto\" based on item in localStorage.",
-    )
+    console.log("getThemeTypeClientSide: setting theme type to \"auto\".")
     return "auto"
   } else {
     // (If environment isn't client's, throw an error)
