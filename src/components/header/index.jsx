@@ -17,7 +17,7 @@ function Header() {
     <>
       <AppBar position={"static"}>
         <Toolbar>
-          <Typography component="h1" variant="h6" style={{flexGrow: 1}}>
+          <Typography component={"h1"} variant={"h6"} style={{flexGrow: 1}}>
             {strings.general.siteName}
           </Typography>
           <Link href={{pathname: "/"}} passHref>
