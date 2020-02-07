@@ -12,6 +12,14 @@
   },
   "header": {
     "preferences": {
+      "theme": {
+        "label": "Theme",
+        "option": {
+          "auto": "Auto",
+          "light": "Light",
+          "dark": "Dark"
+        }
+      },
       "cookieConsent": {
         "label": "Cookie Consent",
         "state": {

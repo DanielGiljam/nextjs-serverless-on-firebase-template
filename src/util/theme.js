@@ -1,3 +1,5 @@
+import setCookie from "util/cookies/set-cookie"
+
 export async function getThemeTypeServerSide(supportedThemeTypes, cookies) {
   console.log(
       "getThemeTypeServerSide: supported theme types:",
@@ -35,6 +37,29 @@ export async function getThemeTypeClientSide() {
     throw new Error(
         "getThemeTypeClientSide() was called in an environment that isn't the client's.",
     )
+  }
+}
+
+export async function setThemeType(
+    supportedThemeTypes,
+    cookieConsent,
+    themeType,
+) {
+  if (!supportedThemeTypes.includes(themeType)) {
+    throw new TypeError(
+        "themeType parameter provided to setThemeType() must be a supported theme type!",
+    )
+  }
+  console.log(`setThemeType: setting theme type to "${themeType}"...`)
+  window.localStorage.themeType = themeType
+  console.log("setThemeType: added theme type to localStorage:", {
+    themeType: themeType.toString(),
+  })
+  if (cookieConsent) {
+    setCookie("theme-type", themeType)
+    console.log("setThemeType: added theme type cookie:", {
+      "theme-type": themeType.toString(),
+    })
   }
 }
 

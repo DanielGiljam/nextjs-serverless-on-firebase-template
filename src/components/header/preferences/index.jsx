@@ -2,12 +2,19 @@ import PropTypes from "prop-types"
 
 import Menu from "@material-ui/core/Menu"
 import MenuItem from "@material-ui/core/MenuItem"
+import Theme from "./theme"
 import CookieConsent from "./cookie-consent"
 
 import useGlobalAppState from "contexts/global-app-state/useGlobalAppState"
 
 function Preferences({anchor, setAnchor}) {
-  const {cookieConsent, setCookieConsent} = useGlobalAppState()
+  const {
+    theme,
+    themes,
+    setTheme,
+    cookieConsent,
+    setCookieConsent,
+  } = useGlobalAppState()
   return (
     <Menu
       id={"preferences"}
@@ -16,6 +23,9 @@ function Preferences({anchor, setAnchor}) {
       anchorEl={anchor}
       keepMounted
     >
+      <MenuItem button={false} style={{outline: "none"}}>
+        <Theme theme={theme} themes={themes} setTheme={setTheme} />
+      </MenuItem>
       <MenuItem button={false} style={{outline: "none"}}>
         <CookieConsent
           cookieConsent={cookieConsent}

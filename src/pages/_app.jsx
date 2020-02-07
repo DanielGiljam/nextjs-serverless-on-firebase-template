@@ -12,7 +12,11 @@ import makeTheme from "contexts/theme/makeTheme"
 import makeStrings from "contexts/strings/makeStrings"
 import makeGlobalAppState from "contexts/global-app-state/makeGlobalAppState"
 
-import {getThemeTypeServerSide, getThemeTypeClientSide} from "util/theme"
+import {
+  getThemeTypeServerSide,
+  getThemeTypeClientSide,
+  setThemeType,
+} from "util/theme"
 import {
   getLangServerSide,
   getLangClientSide,
@@ -143,6 +147,20 @@ class _app extends __app {
           })
           .catch((error) => console.error(error.stack))
     }
+  }
+
+  setTheme(themeType) {
+    const {
+      themes: supportedThemeTypes,
+      cookieConsent,
+    } = this.state.globalAppState
+    setThemeType(supportedThemeTypes, cookieConsent, themeType).then(() =>
+      this.setState((prevState) => ({
+        ...prevState,
+        theme: makeTheme(themeType),
+        globalAppState: {...prevState.globalAppState, theme: themeType},
+      })),
+    )
   }
 
   setCookieConsent(cookieConsent) {
