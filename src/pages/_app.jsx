@@ -64,10 +64,11 @@ class _app extends __app {
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
+    const lang = ctx.query._lang
     /* NOTE: The practice of returning everything inside the "pageProps" property of an object
      * is because Next.js expects the return value to look like that (the code would break otherwise).
      */
-    return {pageProps: {appProps, pageProps}}
+    return {pageProps: {appProps, pageProps, lang}}
   }
 
   static async getInitialPropsServer({req, res}) {
@@ -150,18 +151,28 @@ class _app extends __app {
     }
   }
 
+  componentDidUpdate() {
+    let lang
+    if ((lang = this.props.pageProps.lang)) {
+      this.props.pageProps.lang = null
+      this.setLang(lang)
+    }
+  }
+
   setLang(lang) {
     const {
       languages: supportedLanguages,
       cookieConsent,
     } = this.state.globalAppState
-    setLang(supportedLanguages, cookieConsent, lang).then(() =>
-      this.setState((prevState) => ({
-        ...prevState,
-        strings: makeStrings(lang),
-        globalAppState: {...prevState.globalAppState, lang},
-      })),
-    )
+    setLang(supportedLanguages, cookieConsent, lang)
+        .then(() => makeStrings(lang))
+        .then((strings) =>
+          this.setState((prevState) => ({
+            ...prevState,
+            strings,
+            globalAppState: {...prevState.globalAppState, lang},
+          })),
+        )
   }
 
   setTheme(themeType) {

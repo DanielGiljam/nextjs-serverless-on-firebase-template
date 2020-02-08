@@ -1,22 +1,24 @@
 import Router from "next/router"
 
-import useGlobalAppState from "contexts/global-app-state/useGlobalAppState"
 import {useEffect} from "react"
 
-function Lang({lang, redirectUrl}) {
+function Lang({redirectUrl, redirectAs}) {
   useEffect(() => {
-    console.log("redirectUrl:", redirectUrl)
-    Router.replace(redirectUrl)
+    Router.replace(redirectUrl, redirectAs)
   }, [])
   return null
 }
 
 Lang.getInitialProps = async ({asPath, query}) => {
-  console.log("asPath:", asPath)
-  console.log("query:", query)
+  const lang = query.lang[0]
+  const as = asPath.replace(new RegExp(`/${lang}/?`), "/")
+  const url = as.replace(
+      /(?:\?[^/]*)?$/,
+      (match) => `${match || "?"}&_lang=${lang}`,
+  )
   return {
-    lang: query.lang[0],
-    redirectUrl: asPath.replace(new RegExp(`/${query.lang[0]}/?`), "/"),
+    redirectUrl: url,
+    redirectAs: as,
   }
 }
 
