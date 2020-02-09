@@ -12,6 +12,14 @@
   },
   "header": {
     "preferences": {
+      "lang": {
+        "label": "Language",
+        "option": {
+          "en": "English",
+          "sv": "Svenska",
+          "fi": "Suomi"
+        }
+      },
       "theme": {
         "label": "Theme",
         "option": {
