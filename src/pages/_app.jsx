@@ -64,11 +64,11 @@ class _app extends __app {
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
-    const lang = ctx.query._lang
+    const urlParams = {lang: ctx.query._lang}
     /* NOTE: The practice of returning everything inside the "pageProps" property of an object
      * is because Next.js expects the return value to look like that (the code would break otherwise).
      */
-    return {pageProps: {appProps, pageProps, lang}}
+    return {pageProps: {appProps, pageProps, urlParams}}
   }
 
   static async getInitialPropsServer({req, res}) {
@@ -152,9 +152,10 @@ class _app extends __app {
   }
 
   componentDidUpdate() {
+    const urlParams = this.props.pageProps.urlParams
     let lang
-    if ((lang = this.props.pageProps.lang)) {
-      this.props.pageProps.lang = null
+    if ((lang = urlParams.lang)) {
+      urlParams.lang = null
       this.setLang(lang)
     }
   }
