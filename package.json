@@ -14,10 +14,10 @@
     "serve": "scripts/serve.bash",
     "build": "next build",
     "deploy": "npm run deploy:functions && npm run deploy:hosting",
-    "deploy:functions": "ASSET_PREFIX=https://mui-react-njs-cfr-template.web.app firebase deploy --only functions:next-index,functions:next-about",
+    "deploy:functions": "ASSET_PREFIX=https://mui-react-njs-cfr-template.web.app firebase deploy --only functions:next.index,functions:next.about,functions:next.example,functions:next.lang",
     "deploy:hosting": "firebase deploy --only hosting:mui-react-njs-cfr-template",
     "deploy:serverless": "npm run deploy:serverless:functions && npm run deploy:serverless:hosting",
-    "deploy:serverless:functions": "ASSET_PREFIX=https://mrnct-serverless.web.app firebase deploy --only functions:next-serverless-index,functions:next-serverless-about",
+    "deploy:serverless:functions": "ASSET_PREFIX=https://mrnct-serverless.web.app firebase deploy --only functions:next.serverless.index,functions:next.serverless.about",
     "deploy:serverless:hosting": "firebase deploy --only hosting:serverless"
   },
   "dependencies": {
