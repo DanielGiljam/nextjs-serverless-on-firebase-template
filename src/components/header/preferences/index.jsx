@@ -6,7 +6,7 @@ import Lang from "./lang"
 import Theme from "./theme"
 import CookieConsent from "./cookie-consent"
 
-import useGlobalAppState from "contexts/global-app-state/useGlobalAppState"
+import useGlobalAppState from "nextjs-global-app-state/useGlobalAppState"
 
 function Preferences({anchor, setAnchor}) {
   const {
@@ -28,10 +28,10 @@ function Preferences({anchor, setAnchor}) {
       keepMounted
     >
       <MenuItem button={false} style={{outline: "none"}}>
-        <Lang lang={lang} languages={languages} setLang={setLang} />
+        <Lang lang={lang} languages={Array.from(languages)} setLang={setLang} />
       </MenuItem>
       <MenuItem button={false} style={{outline: "none"}}>
-        <Theme theme={theme} themes={themes} setTheme={setTheme} />
+        <Theme theme={theme} themes={Array.from(themes)} setTheme={setTheme} />
       </MenuItem>
       <MenuItem button={false} style={{outline: "none"}}>
         <CookieConsent

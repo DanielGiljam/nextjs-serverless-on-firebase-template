@@ -48,7 +48,7 @@ class _document extends __document {
       ...initialProps,
       // Styles fragment is rendered after the app and page rendering finish.
       styles: [
-        <Fragment key="styles">
+        <Fragment key={"styles"}>
           {initialProps.styles}
           {sheets.getStyleElement()}
         </Fragment>,
@@ -61,12 +61,14 @@ class _document extends __document {
       <Html>
         <Head>
           <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            rel={"stylesheet"}
+            href={
+              "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+            }
           />
           <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel={"stylesheet"}
+            href={"https://fonts.googleapis.com/icon?family=Material+Icons"}
           />
         </Head>
         <body>
