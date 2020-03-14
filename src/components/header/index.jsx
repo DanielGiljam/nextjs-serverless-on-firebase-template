@@ -1,7 +1,8 @@
 import Head from "next/head"
 import Link from "next/link"
+import {useRouter} from "next/router"
 
-import {useState} from "react"
+import {useEffect, useState} from "react"
 
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
@@ -13,10 +14,24 @@ import SettingsRoundedIcon from "@material-ui/icons/SettingsRounded"
 import Preferences from "./preferences"
 
 import useStrings from "nextjs-global-app-state/useStrings"
+import useGlobalAppState from "nextjs-global-app-state/useGlobalAppState"
 
 function Header() {
   const strings = useStrings()
+  const {setLang} = useGlobalAppState()
   const [preferencesAnchor, setPreferencesAnchor] = useState(null)
+  const router = useRouter()
+  useEffect(() => {
+    let lang
+    if (
+      (lang = Array.isArray(router.query._lang) ?
+        router.query._lang[0] :
+        router.query._lang)
+    ) {
+      router.query._lang = undefined
+      setLang(lang)
+    }
+  }, [router.query._lang])
   return (
     <>
       <Head>
