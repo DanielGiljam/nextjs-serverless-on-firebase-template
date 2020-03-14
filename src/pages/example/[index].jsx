@@ -1,6 +1,6 @@
 import Typography from "@material-ui/core/Typography"
 
-import useStrings from "contexts/strings/useStrings"
+import useStrings from "nextjs-global-app-state/useStrings"
 import {useRouter} from "next/router"
 
 function Example() {

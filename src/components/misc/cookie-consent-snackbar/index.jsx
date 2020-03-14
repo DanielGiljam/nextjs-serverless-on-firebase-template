@@ -2,8 +2,8 @@ import Button from "@material-ui/core/Button"
 import Snackbar from "@material-ui/core/Snackbar"
 
 import useStyles from "./styles"
-import useStrings from "contexts/strings/useStrings"
-import useGlobalAppState from "contexts/global-app-state/useGlobalAppState"
+import useStrings from "nextjs-global-app-state/useStrings"
+import useGlobalAppState from "nextjs-global-app-state/useGlobalAppState"
 
 function CookieConsentSnackbar() {
   const styles = useStyles()

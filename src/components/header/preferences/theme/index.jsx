@@ -6,7 +6,7 @@ import ToggleButton from "@material-ui/lab/ToggleButton"
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup"
 
 import useStyles from "./styles"
-import useStrings from "contexts/strings/useStrings"
+import useStrings from "nextjs-global-app-state/useStrings"
 
 function Theme({theme, themes, setTheme}) {
   const styles = useStyles()

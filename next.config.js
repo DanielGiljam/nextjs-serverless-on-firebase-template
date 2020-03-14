@@ -1,10 +1,12 @@
+const withGlobalAppState = require("nextjs-global-app-state/withGlobalAppState")
+
 require("dotenv").config()
 
 if (!process.env.ASSET_PREFIX) {
   throw new TypeError("process.env.ASSET_PREFIX is not defined!")
 }
 
-module.exports = {
+module.exports = withGlobalAppState({
   env: {
     // When loading static resources over the network in the Next.js app's/website's code,
     // this combined with the path to the resource becomes the URL of the requested resource.
@@ -22,4 +24,4 @@ module.exports = {
     ]
     return config
   },
-}
+})

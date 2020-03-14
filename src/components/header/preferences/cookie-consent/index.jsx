@@ -6,7 +6,7 @@ import FormHelperText from "@material-ui/core/FormHelperText"
 import Button from "@material-ui/core/Button"
 
 import useStyles from "./styles"
-import useStrings from "contexts/strings/useStrings"
+import useStrings from "nextjs-global-app-state/useStrings"
 
 function CookieConsent({cookieConsent, setCookieConsent}) {
   const styles = useStyles()
