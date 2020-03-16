@@ -2,8 +2,6 @@ import {useEffect} from "react"
 
 import {appFactory, lang, theme} from "nextjs-global-app-state"
 
-import extendStringClass from "nextjs-global-app-state/util/strings/extendStringClass"
-
 import responsiveFontSizes from "@material-ui/core/styles/responsiveFontSizes"
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme"
 import {ThemeProvider} from "@material-ui/core/styles"
@@ -13,8 +11,6 @@ import CookieConsentBar from "components/misc/cookie-consent-snackbar"
 import CssBaseline from "@material-ui/core/CssBaseline"
 
 import fetch from "isomorphic-unfetch"
-
-extendStringClass()
 
 export default appFactory({
   // eslint-disable-next-line

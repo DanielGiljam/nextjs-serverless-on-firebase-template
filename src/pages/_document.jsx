@@ -1,6 +1,6 @@
-import {Fragment} from "react"
-
 import __document, {Head, Html, Main, NextScript} from "next/document"
+
+import {Fragment} from "react"
 
 import ServerStyleSheets from "@material-ui/styles/ServerStyleSheets"
 
@@ -58,7 +58,7 @@ class _document extends __document {
 
   render() {
     return (
-      <Html>
+      <Html lang={this.props.__NEXT_DATA__.props.dehydratedState.lang.value}>
         <Head>
           <link
             rel={"stylesheet"}

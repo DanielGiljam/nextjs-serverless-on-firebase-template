@@ -1,7 +1,10 @@
+import {useRouter} from "next/router"
+
 import Typography from "@material-ui/core/Typography"
 
 import useStrings from "nextjs-global-app-state/useStrings"
-import {useRouter} from "next/router"
+
+import format from "nextjs-global-app-state/util/strings/format"
 
 function Example() {
   const strings = useStrings()
@@ -11,7 +14,7 @@ function Example() {
   return (
     <Typography variant={"body1"}>
       {example ?
-        String.format(strings.general.templates.thisIsTheXExample, example) :
+        format(strings.general.templates.thisIsTheXExample, example) :
         strings.example.thisIsNullExample}
     </Typography>
   )

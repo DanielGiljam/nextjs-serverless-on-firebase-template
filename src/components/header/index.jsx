@@ -1,8 +1,7 @@
 import Head from "next/head"
 import Link from "next/link"
-import {useRouter} from "next/router"
 
-import {useEffect, useState} from "react"
+import {useState} from "react"
 
 import AppBar from "@material-ui/core/AppBar"
 import Toolbar from "@material-ui/core/Toolbar"
@@ -14,24 +13,12 @@ import SettingsRoundedIcon from "@material-ui/icons/SettingsRounded"
 import Preferences from "./preferences"
 
 import useStrings from "nextjs-global-app-state/useStrings"
-import useGlobalAppState from "nextjs-global-app-state/useGlobalAppState"
+
+import ucFirst from "nextjs-global-app-state/util/strings/ucFirst"
 
 function Header() {
   const strings = useStrings()
-  const {setLang} = useGlobalAppState()
   const [preferencesAnchor, setPreferencesAnchor] = useState(null)
-  const router = useRouter()
-  useEffect(() => {
-    let lang
-    if (
-      (lang = Array.isArray(router.query._lang) ?
-        router.query._lang[0] :
-        router.query._lang)
-    ) {
-      router.query._lang = undefined
-      setLang(lang)
-    }
-  }, [router.query._lang])
   return (
     <>
       <Head>
@@ -49,17 +36,18 @@ function Header() {
           </Typography>
           <Link href={{pathname: "/"}} passHref>
             <Button component={"a"} color={"inherit"}>
-              {strings.general.pageNames.home.ucFirst()}
+              {ucFirst(strings.general.pageNames.home)}
             </Button>
           </Link>
           <Link href={{pathname: "/about"}} passHref>
             <Button component={"a"} color={"inherit"}>
-              {strings.general.pageNames.about.ucFirst()}
+              {ucFirst(strings.general.pageNames.about)}
             </Button>
           </Link>
           <IconButton
             onClick={(event) => setPreferencesAnchor(event.currentTarget)}
             color={"inherit"}
+            aria-label={"preferences"}
             aria-controls={"preferences"}
             aria-haspopup={"true"}
           >

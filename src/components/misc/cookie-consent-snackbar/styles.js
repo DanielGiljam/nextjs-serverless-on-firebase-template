@@ -8,18 +8,18 @@ import color from "color"
 function styles(theme) {
   return {
     buttonPositive: {
-      "color": green[500],
+      "color": green[800],
       "&:hover": {
-        backgroundColor: color(green[500])
+        backgroundColor: color(green[800])
             .alpha(theme.palette.action.hoverOpacity)
             .rgb()
             .string(),
       },
     },
     buttonNegative: {
-      "color": red[500],
+      "color": red[800],
       "&:hover": {
-        backgroundColor: color(red[500])
+        backgroundColor: color(red[800])
             .alpha(theme.palette.action.hoverOpacity)
             .rgb()
             .string(),

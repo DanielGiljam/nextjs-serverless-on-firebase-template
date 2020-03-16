@@ -3,7 +3,7 @@ const functions = require("firebase-functions")
 const index = require("../../.next/serverless/pages/index")
 const about = require("../../.next/serverless/pages/about")
 const example = require("../../.next/serverless/pages/example/[index]")
-const lang = require("../../.next/serverless/pages/[...lang]")
+const lang = require("../../.next/serverless/pages/[..._lang]")
 
 module.exports = {
   next: {
