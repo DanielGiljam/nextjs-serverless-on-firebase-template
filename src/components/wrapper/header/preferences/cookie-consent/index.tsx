@@ -1,5 +1,3 @@
-import PropTypes from "prop-types"
-
 import FormControl from "@material-ui/core/FormControl"
 import FormLabel from "@material-ui/core/FormLabel"
 import FormHelperText from "@material-ui/core/FormHelperText"
@@ -7,10 +5,12 @@ import Button from "@material-ui/core/Button"
 
 import useStyles from "./styles"
 import useStrings from "nextjs-global-app-state/useStrings"
+import useGlobalAppState from "nextjs-global-app-state/useGlobalAppState"
 
-function CookieConsent({cookieConsent, setCookieConsent}) {
+function CookieConsent(): JSX.Element {
   const styles = useStyles()
   const strings = useStrings().header.preferences.cookieConsent
+  const {cookieConsent, setCookieConsent} = useGlobalAppState()
   return (
     <FormControl component={"fieldset"}>
       <FormLabel className={styles.legend} component={"legend"}>
@@ -23,17 +23,12 @@ function CookieConsent({cookieConsent, setCookieConsent}) {
         className={`${styles.button} ${
           styles[cookieConsent ? "buttonNegative" : "buttonPositive"]
         }`}
-        onClick={() => setCookieConsent(!cookieConsent)}
+        onClick={(): void => setCookieConsent(!cookieConsent)}
       >
         {strings.action[cookieConsent ? "negative" : "positive"]}
       </Button>
     </FormControl>
   )
-}
-
-CookieConsent.propTypes = {
-  cookieConsent: PropTypes.bool,
-  setCookieConsent: PropTypes.func.isRequired,
 }
 
 export default CookieConsent

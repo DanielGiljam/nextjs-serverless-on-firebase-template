@@ -5,12 +5,13 @@ import useStyles from "./styles"
 import useStrings from "nextjs-global-app-state/useStrings"
 import useGlobalAppState from "nextjs-global-app-state/useGlobalAppState"
 
-function CookieConsentSnackbar() {
+function CookieConsentSnackbar(): JSX.Element {
   const styles = useStyles()
   const strings = useStrings().cookieConsentSnackbar
   const {cookieConsent, setCookieConsent} = useGlobalAppState()
   return (
     <Snackbar
+      className={styles.snackbar}
       anchorOrigin={{
         vertical: "bottom",
         horizontal: "right",
@@ -21,13 +22,13 @@ function CookieConsentSnackbar() {
         <>
           <Button
             className={styles.buttonPositive}
-            onClick={() => setCookieConsent(true)}
+            onClick={(): void => setCookieConsent(true)}
           >
             {strings.yes}
           </Button>
           <Button
             className={styles.buttonNegative}
-            onClick={() => setCookieConsent(false)}
+            onClick={(): void => setCookieConsent(false)}
           >
             {strings.no}
           </Button>

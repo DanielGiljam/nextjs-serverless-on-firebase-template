@@ -1,5 +1,3 @@
-import PropTypes from "prop-types"
-
 import FormControl from "@material-ui/core/FormControl"
 import FormLabel from "@material-ui/core/FormLabel"
 import ToggleButton from "@material-ui/lab/ToggleButton"
@@ -7,10 +5,12 @@ import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup"
 
 import useStyles from "./styles"
 import useStrings from "nextjs-global-app-state/useStrings"
+import useGlobalAppState from "nextjs-global-app-state/useGlobalAppState"
 
-function Lang({lang, languages, setLang}) {
+function Theme(): JSX.Element {
   const styles = useStyles()
-  const strings = useStrings().header.preferences.lang
+  const strings = useStrings().header.preferences.theme
+  const {theme, themes, setTheme} = useGlobalAppState()
   return (
     <FormControl component={"fieldset"}>
       <FormLabel className={styles.legend} component={"legend"}>
@@ -18,13 +18,13 @@ function Lang({lang, languages, setLang}) {
       </FormLabel>
       <ToggleButtonGroup
         className={styles.toggleButtonGroup}
-        onChange={(_event, value) => setLang(value)}
+        onChange={(_event, value): void => setTheme(value)}
         exclusive
-        value={lang}
+        value={theme}
       >
-        {languages.map((theme) => (
-          <ToggleButton key={theme} value={theme}>
-            {strings.option[theme]}
+        {Array.from(themes).map((theme) => (
+          <ToggleButton key={theme as string} value={theme}>
+            {strings.option[theme as string]}
           </ToggleButton>
         ))}
       </ToggleButtonGroup>
@@ -32,10 +32,4 @@ function Lang({lang, languages, setLang}) {
   )
 }
 
-Lang.propTypes = {
-  lang: PropTypes.string.isRequired,
-  languages: PropTypes.arrayOf(PropTypes.string).isRequired,
-  setLang: PropTypes.func.isRequired,
-}
-
-export default Lang
+export default Theme
