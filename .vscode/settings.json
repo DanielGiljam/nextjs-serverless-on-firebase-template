@@ -3,12 +3,14 @@
     "Giljam",
     "Svenska",
     "builtins",
+    "esnext",
     "nextjs",
     "predeploy",
     "serializable",
     "unfetch"
   ],
+  "editor.tabSize": 2,
   "files.autoGuessEncoding": false,
-  "files.eol": "\n",
-  "files.encoding": "utf8"
+  "files.encoding": "utf8",
+  "files.eol": "\n"
 }
