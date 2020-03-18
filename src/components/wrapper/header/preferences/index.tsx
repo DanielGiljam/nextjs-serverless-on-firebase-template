@@ -1,5 +1,10 @@
-import Menu from "@material-ui/core/Menu"
-import MenuItem from "@material-ui/core/MenuItem"
+import Popover from "@material-ui/core/Popover"
+
+import {
+  Theme as MuiTheme,
+  createStyles,
+  makeStyles,
+} from "@material-ui/core/styles"
 
 import Lang from "./lang"
 import Theme from "./theme"
@@ -7,30 +12,51 @@ import CookieConsent from "./cookie-consent"
 
 import {Anchor} from "../index"
 
+const useStyles = makeStyles((theme: MuiTheme) =>
+  createStyles({
+    paper: {
+      "display": "flex",
+      "flexDirection": "column",
+      "margin": 0,
+      "padding": theme.spacing(1),
+      "& > li": {
+        "marginTop": theme.spacing(1),
+        "& > label": {
+          display: "block",
+          lineHeight: 1,
+        },
+        "& > :last-child": {
+          marginTop: theme.spacing(1),
+        },
+      },
+    },
+  }),
+)
+
 interface PreferencesProps {
   anchor: Anchor
   setAnchor: (anchor: Anchor) => void
 }
 
 function Preferences({anchor, setAnchor}: PreferencesProps): JSX.Element {
+  const styles = useStyles()
+  function onClose() {
+    setAnchor(undefined)
+  }
   return (
-    <Menu
+    <Popover
+      anchorEl={anchor}
       id={"preferences"}
       open={!!anchor}
-      onClose={(): void => setAnchor(undefined)}
-      anchorEl={anchor}
+      PaperProps={{className: styles.paper, component: "ul", role: "group"}}
+      transformOrigin={{horizontal: "right", vertical: "top"}}
       keepMounted
+      onClose={onClose}
     >
-      <MenuItem button={false} style={{outline: "none"}}>
-        <Lang />
-      </MenuItem>
-      <MenuItem button={false} style={{outline: "none"}}>
-        <Theme />
-      </MenuItem>
-      <MenuItem button={false} style={{outline: "none"}}>
-        <CookieConsent />
-      </MenuItem>
-    </Menu>
+      <Lang />
+      <Theme />
+      <CookieConsent />
+    </Popover>
   )
 }
 

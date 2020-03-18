@@ -1,34 +1,39 @@
-import FormControl from "@material-ui/core/FormControl"
-import FormLabel from "@material-ui/core/FormLabel"
-import ToggleButton from "@material-ui/lab/ToggleButton"
+import Typography from "@material-ui/core/Typography"
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup"
+import ToggleButton from "@material-ui/lab/ToggleButton"
 
-import useStyles from "./styles"
 import useStrings from "nextjs-global-app-state/useStrings"
 import useGlobalAppState from "nextjs-global-app-state/useGlobalAppState"
 
 function Lang(): JSX.Element {
-  const styles = useStyles()
   const strings = useStrings().header.preferences.lang
   const {lang, languages, setLang} = useGlobalAppState()
+  function onChange(_event: any, value: any) {
+    console.log(_event)
+    if (value) setLang(value)
+  }
   return (
-    <FormControl component={"fieldset"}>
-      <FormLabel className={styles.legend} component={"legend"}>
+    <li>
+      <Typography component={"label"} id={"language"} variant={"body1"}>
         {strings.label}
-      </FormLabel>
+      </Typography>
       <ToggleButtonGroup
-        className={styles.toggleButtonGroup}
-        onChange={(_event, value): void => setLang(value)}
-        exclusive
+        aria-labelledby={"language"}
         value={lang}
+        exclusive
+        onChange={onChange}
       >
         {Array.from(languages).map((lang) => (
-          <ToggleButton key={lang as string} value={lang}>
+          <ToggleButton
+            key={lang as string}
+            aria-label={lang as string}
+            value={lang}
+          >
             {strings.option[lang as string]}
           </ToggleButton>
         ))}
       </ToggleButtonGroup>
-    </FormControl>
+    </li>
   )
 }
 
