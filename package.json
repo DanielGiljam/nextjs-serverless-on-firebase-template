@@ -11,6 +11,8 @@
   "repository": "github:DanielGiljam/nextjs-serverless-on-firebase-template",
   "scripts": {
     "dev": "next dev",
+    "format": "prettier-eslint \"src/**\"",
+    "lint": "eslint \"src/**\"",
     "serve": "scripts/serve.bash",
     "build": "next build",
     "deploy": "npm run deploy:functions && npm run deploy:hosting",
@@ -44,6 +46,7 @@
     "nextjs-global-app-state": "^2.1.0",
     "prettier": "^1.19.1",
     "prettier-eslint": "^9.0.1",
+    "prettier-eslint-cli": "^5.0.0",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "typescript": "^3.8.3"
