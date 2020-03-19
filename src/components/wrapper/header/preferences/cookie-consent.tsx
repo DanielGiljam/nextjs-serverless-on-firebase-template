@@ -1,13 +1,15 @@
-import Typography from "@material-ui/core/Typography"
 import Button from "@material-ui/core/Button"
+import Typography from "@material-ui/core/Typography"
 
 import {Theme, createStyles, makeStyles} from "@material-ui/core/styles"
+
 import green from "@material-ui/core/colors/green"
 import red from "@material-ui/core/colors/red"
+
 import color from "color"
 
-import useStrings from "nextjs-global-app-state/useStrings"
 import useGlobalAppState from "nextjs-global-app-state/useGlobalAppState"
+import useStrings from "nextjs-global-app-state/useStrings"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

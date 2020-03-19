@@ -1,8 +1,8 @@
 import Typography from "@material-ui/core/Typography"
 
 import {Theme, createStyles, makeStyles} from "@material-ui/core/styles"
-import useStrings from "nextjs-global-app-state/useStrings"
 
+import useStrings from "nextjs-global-app-state/useStrings"
 import format from "nextjs-global-app-state/util/strings/format"
 import ucFirst from "nextjs-global-app-state/util/strings/ucFirst"
 

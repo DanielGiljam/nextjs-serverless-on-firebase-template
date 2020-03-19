@@ -1,10 +1,10 @@
 import {ReactNode, useEffect} from "react"
 
-import Paper from "@material-ui/core/Paper"
 import Container from "@material-ui/core/Container"
+import Paper from "@material-ui/core/Paper"
 
-import Header from "./header"
 import CookieConsentSnackbar from "./cookie-consent-snackbar"
+import Header from "./header"
 
 function Wrapper({children}: {children: ReactNode}): JSX.Element {
   useEffect(() => {

@@ -1,19 +1,19 @@
 import {Provider} from "react"
 
-import appFactory from "nextjs-global-app-state/appFactory"
-import lang from "nextjs-global-app-state/lang"
-import theme from "nextjs-global-app-state/theme"
-
 import {
   Theme,
   createMuiTheme,
   responsiveFontSizes,
 } from "@material-ui/core/styles"
 
-import Wrapper from "../components/wrapper"
-import ThemeProvider from "../components/theme-provider"
+import appFactory from "nextjs-global-app-state/appFactory"
+import lang from "nextjs-global-app-state/lang"
+import theme from "nextjs-global-app-state/theme"
 
 import fetch from "isomorphic-unfetch"
+
+import ThemeProvider from "../components/theme-provider"
+import Wrapper from "../components/wrapper"
 
 import "../theme/_app.css"
 

@@ -11,8 +11,9 @@
   "repository": "github:DanielGiljam/nextjs-serverless-on-firebase-template",
   "scripts": {
     "dev": "next dev",
-    "format": "prettier-eslint \"src/**\"",
-    "lint": "eslint \"src/**\"",
+    "check": "tsc",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
+    "format": "prettier-eslint --write \"${PWD}/src/**/*.{js,jsx,ts,tsx,css,sass,scss,json}\"",
     "serve": "scripts/serve.bash",
     "build": "next build",
     "deploy": "npm run deploy:functions && npm run deploy:hosting",
@@ -41,6 +42,7 @@
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-react": "^7.19.0",
     "firebase-functions-test": "^0.1.6",
+    "husky": "^4.2.3",
     "isomorphic-unfetch": "^3.0.0",
     "next": "^9.3.0",
     "nextjs-global-app-state": "^2.1.0",
@@ -53,5 +55,10 @@
   },
   "engines": {
     "node": "8"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run check && npm run lint && npm run format"
+    }
   }
 }

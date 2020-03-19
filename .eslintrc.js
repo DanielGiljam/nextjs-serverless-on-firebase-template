@@ -81,4 +81,9 @@ module.exports = {
     quotes: [1, "double"],
     semi: [1, "never"],
   },
+  settings: {
+    react: {
+      version: "detect",
+    },
+  },
 }

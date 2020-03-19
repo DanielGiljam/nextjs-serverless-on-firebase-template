@@ -1,7 +1,7 @@
+import {useEffect} from "react"
+
 import {NextPageContext} from "next"
 import Router from "next/router"
-
-import {useEffect} from "react"
 
 interface LangProps {
   redirectUrl: string;

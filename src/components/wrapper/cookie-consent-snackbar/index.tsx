@@ -1,9 +1,10 @@
 import Button from "@material-ui/core/Button"
 import Snackbar from "@material-ui/core/Snackbar"
 
-import useStyles from "./styles"
-import useStrings from "nextjs-global-app-state/useStrings"
 import useGlobalAppState from "nextjs-global-app-state/useGlobalAppState"
+import useStrings from "nextjs-global-app-state/useStrings"
+
+import useStyles from "./styles"
 
 function CookieConsentSnackbar(): JSX.Element {
   const styles = useStyles()
@@ -11,13 +12,6 @@ function CookieConsentSnackbar(): JSX.Element {
   const {cookieConsent, setCookieConsent} = useGlobalAppState()
   return (
     <Snackbar
-      className={styles.snackbar}
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "right",
-      }}
-      open={cookieConsent == null}
-      message={strings.message}
       action={
         <>
           <Button
@@ -34,6 +28,13 @@ function CookieConsentSnackbar(): JSX.Element {
           </Button>
         </>
       }
+      anchorOrigin={{
+        vertical: "bottom",
+        horizontal: "right",
+      }}
+      className={styles.snackbar}
+      message={strings.message}
+      open={cookieConsent == null}
     />
   )
 }

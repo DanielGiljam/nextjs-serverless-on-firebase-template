@@ -6,11 +6,11 @@ import {
   makeStyles,
 } from "@material-ui/core/styles"
 
+import {Anchor} from "../index"
+
+import CookieConsent from "./cookie-consent"
 import Lang from "./lang"
 import Theme from "./theme"
-import CookieConsent from "./cookie-consent"
-
-import {Anchor} from "../index"
 
 const useStyles = makeStyles((theme: MuiTheme) =>
   createStyles({
@@ -34,13 +34,13 @@ const useStyles = makeStyles((theme: MuiTheme) =>
 )
 
 interface PreferencesProps {
-  anchor: Anchor
-  setAnchor: (anchor: Anchor) => void
+  anchor: Anchor;
+  setAnchor: (anchor: Anchor) => void;
 }
 
 function Preferences({anchor, setAnchor}: PreferencesProps): JSX.Element {
   const styles = useStyles()
-  function onClose() {
+  function onClose(): void {
     setAnchor(undefined)
   }
   return (

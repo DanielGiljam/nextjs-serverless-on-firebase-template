@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 const functions = require("firebase-functions")
 
-const index = require("../../.next/serverless/pages/index")
+const lang = require("../../.next/serverless/pages/[..._lang]")
 const about = require("../../.next/serverless/pages/about")
 const example = require("../../.next/serverless/pages/example/[index]")
-const lang = require("../../.next/serverless/pages/[..._lang]")
+const index = require("../../.next/serverless/pages/index")
 
 module.exports = {
   next: {
