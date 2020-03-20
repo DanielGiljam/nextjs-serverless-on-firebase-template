@@ -1,16 +1,4 @@
 {
-  "general": {
-    "siteName": "Material-UI + React + Next.js Template",
-    "description": "A site demonstrating the combination Material-UI, React and Next.js",
-    "pageNames": {
-      "home": "home",
-      "about": "about"
-    },
-    "templates": {
-      "thisIsTheXPage": "This is the %s -page",
-      "thisIsTheXExample": "This is an example of using dynamic routing. The query parameter is \"%s\"."
-    }
-  },
   "header": {
     "preferences": {
       "lang": {
@@ -30,24 +18,24 @@
         }
       },
       "cookieConsent": {
-        "label": "Cookie Consent",
+        "label": "Cookies",
         "state": {
-          "positive": "You are giving consent to cookies.",
-          "negative": "You haven't given consent to cookies."
+          "positive": "You are allowing cookies and similar technologies.",
+          "negative": "You are not allowing cookies and similar technologies."
         },
         "action": {
-          "positive": "Allow cookies",
-          "negative": "Revoke consent"
+          "positive": "Allow",
+          "negative": "Disallow"
         }
       }
     }
   },
-  "example": {
-    "thisIsNullExample": "This is an example of using dynamic routing, although there is no query parameter."
+  "index": {
+    "placeholderText": "This is a placeholder text."
   },
   "cookieConsentSnackbar": {
-    "message": "This website uses cookies in order to provide a faster, more customized user experience. Is it okay if we proceed in using cookies?",
-    "yes": "Yes, whatever",
-    "no": "No, don't use cookies"
+    "message": "This website uses cookies and similar technologies in order to provide a faster, more customized user experience. Is it okay if we proceed in using cookies?",
+    "yes": "Yes",
+    "no": "No"
   }
 }

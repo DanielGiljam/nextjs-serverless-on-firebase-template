@@ -14,16 +14,19 @@ import Theme from "./theme"
 
 const useStyles = makeStyles((theme: MuiTheme) =>
   createStyles({
+    popover: {
+      zIndex: theme.zIndex.snackbar + 1,
+    },
     paper: {
-      "display": "flex",
-      "flexDirection": "column",
+      "listStyleType": "none",
       "margin": 0,
-      "padding": theme.spacing(1),
+      "padding": theme.spacing(2),
       "& > li": {
-        "marginTop": theme.spacing(1),
+        "&:not(:first-child)": {
+          marginTop: theme.spacing(2),
+        },
         "& > label": {
           display: "block",
-          lineHeight: 1,
         },
         "& > :last-child": {
           marginTop: theme.spacing(1),
@@ -46,6 +49,8 @@ function Preferences({anchor, setAnchor}: PreferencesProps): JSX.Element {
   return (
     <Popover
       anchorEl={anchor}
+      anchorOrigin={{horizontal: "right", vertical: "top"}}
+      className={styles.popover}
       id={"preferences"}
       open={!!anchor}
       PaperProps={{className: styles.paper, component: "ul", role: "group"}}

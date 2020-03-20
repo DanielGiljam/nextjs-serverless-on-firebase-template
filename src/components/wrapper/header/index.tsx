@@ -10,8 +10,6 @@ import Toolbar from "@material-ui/core/Toolbar"
 import Typography from "@material-ui/core/Typography"
 import SettingsRoundedIcon from "@material-ui/icons/SettingsRounded"
 
-import useStrings from "nextjs-global-app-state/useStrings"
-
 import Preferences from "./preferences"
 import useStyles from "./styles"
 
@@ -19,13 +17,16 @@ export type Anchor = (EventTarget & HTMLButtonElement) | undefined
 
 function Header(): JSX.Element {
   const styles = useStyles()
-  const strings = useStrings()
   const [preferencesAnchor, setPreferencesAnchor] = useState<Anchor>(undefined)
+  const title = "Next.js Serverless on Firebase Demo"
+  const description =
+    "Next.js + build target: serverless + Cloud Functions for Firebase + Firebase Hosting"
+  const anchor = "NEXTJS SERVERLESS ON FIREBASE DEMO"
   return (
     <>
       <Head>
-        <title>{strings.general.siteName}</title>
-        <meta content={strings.general.description} name={"description"} />
+        <title>{title}</title>
+        <meta content={description} name={"description"} />
       </Head>
       <AppBar color={"transparent"} elevation={0} position={"static"}>
         <Toolbar variant={"dense"}>
@@ -37,7 +38,7 @@ function Header(): JSX.Element {
                 color={"textSecondary"}
                 underline={"none"}
               >
-                {strings.general.siteName}
+                {anchor}
               </MuiLink>
             </NextLink>
           </Typography>

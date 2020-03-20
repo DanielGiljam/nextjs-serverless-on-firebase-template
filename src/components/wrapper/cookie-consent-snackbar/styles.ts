@@ -8,6 +8,7 @@ import color from "color"
 export default makeStyles((theme: Theme) =>
   createStyles({
     snackbar: {
+      zIndex: theme.zIndex.modal - 1,
       [theme.breakpoints.up("sm")]: {
         maxWidth: 400,
       },

@@ -1,12 +1,41 @@
 {
-  "general": {
-    "siteName": "Material-UI + React + Next.js malli",
-    "pageNames": {
-      "home": "koti",
-      "about": "meistä"
-    },
-    "templates": {
-      "thisIsTheXPage": "Tämä on %s -sivu"
+  "header": {
+    "preferences": {
+      "lang": {
+        "label": "Kieli",
+        "option": {
+          "en": "English",
+          "sv": "Svenska",
+          "fi": "Suomi"
+        }
+      },
+      "theme": {
+        "label": "Teema",
+        "option": {
+          "auto": "Auto",
+          "light": "Kirkas",
+          "dark": "Pimeä"
+        }
+      },
+      "cookieConsent": {
+        "label": "Evästeet",
+        "state": {
+          "positive": "Sallit evästeitä ja vastaavia teknologioita.",
+          "negative": "Et salli evästeitä ja vastaavia teknologioita."
+        },
+        "action": {
+          "positive": "Salli",
+          "negative": "Älä salli"
+        }
+      }
     }
+  },
+  "index": {
+    "placeholderText": "Tämä on paikanpitäjä-teksti."
+  },
+  "cookieConsentSnackbar": {
+    "message": "Tämä nettisivu käyttää evästeitä ja vastaavia teknologioita jotta voimme tarjota sinulle nopeamman, räätälöitymmän käyttökokemuksen. Sallitko evästeiden käyttöä?",
+    "yes": "Kyllä",
+    "no": "Ei"
   }
 }

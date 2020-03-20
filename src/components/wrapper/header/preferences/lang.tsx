@@ -11,8 +11,11 @@ function Lang(): JSX.Element {
   const strings = useStrings().header.preferences.lang
   const {lang, languages, setLang} = useGlobalAppState()
   function onChange(_event: MouseEvent<HTMLElement>, value: string): void {
-    console.log(_event)
-    if (value) setLang(value)
+    if (value) {
+      setLang(value)
+    } else {
+      setLang(lang)
+    }
   }
   return (
     <li>

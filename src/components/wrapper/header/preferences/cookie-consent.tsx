@@ -13,7 +13,15 @@ import useStrings from "nextjs-global-app-state/useStrings"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
+    helperText: {
+      maxWidth: 240,
+    },
+    group: {
+      paddingTop: theme.spacing(0.75),
+      paddingBottom: theme.spacing(0.75),
+    },
     buttonPositive: {
+      "borderColor": green[500],
       "color": green[500],
       "&:hover": {
         backgroundColor: color(green[500])
@@ -23,6 +31,8 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     buttonNegative: {
+      "marginLeft": theme.spacing(1),
+      "borderColor": red[500],
       "color": red[500],
       "&:hover": {
         backgroundColor: color(red[500])
@@ -38,25 +48,45 @@ function CookieConsent(): JSX.Element {
   const styles = useStyles()
   const strings = useStrings().header.preferences.cookieConsent
   const {cookieConsent, setCookieConsent} = useGlobalAppState()
+  function giveCookieConsent(): void {
+    setCookieConsent(true)
+  }
+  function revokeCookieConsent(): void {
+    setCookieConsent(false)
+  }
   return (
     <li>
-      <Typography component={"label"} id={"cookie consent"} variant={"body1"}>
+      <Typography component={"label"} id={"cookies"} variant={"body1"}>
         {strings.label}
       </Typography>
-      <Typography color={"textSecondary"} component={"p"} variant={"caption"}>
+      <Typography
+        className={styles.helperText}
+        color={"textSecondary"}
+        component={"p"}
+        variant={"caption"}
+      >
         {strings.state[cookieConsent ? "positive" : "negative"]}
       </Typography>
-      <Button
-        aria-label={
-          cookieConsent ?
-            "revoke consent to cookies" :
-            "give consent to cookies"
-        }
-        className={styles[cookieConsent ? "buttonNegative" : "buttonPositive"]}
-        onClick={(): void => setCookieConsent(!cookieConsent)}
-      >
-        {strings.action[cookieConsent ? "negative" : "positive"]}
-      </Button>
+      <div aria-labelledby={"cookies"} className={styles.group} role={"group"}>
+        <Button
+          aria-label={strings.action.positive}
+          className={styles.buttonPositive}
+          disabled={cookieConsent}
+          variant={"outlined"}
+          onClick={giveCookieConsent}
+        >
+          {strings.action.positive}
+        </Button>
+        <Button
+          aria-label={strings.action.negative}
+          className={styles.buttonNegative}
+          disabled={cookieConsent === false}
+          variant={"outlined"}
+          onClick={revokeCookieConsent}
+        >
+          {strings.action.negative}
+        </Button>
+      </div>
     </li>
   )
 }

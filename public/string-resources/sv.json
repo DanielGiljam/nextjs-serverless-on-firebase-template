@@ -1,12 +1,41 @@
 {
-  "general": {
-    "siteName": "Material-UI + React + Next.js mall",
-    "pageNames": {
-      "home": "hem",
-      "about": "om"
-    },
-    "templates": {
-      "thisIsTheXPage": "Det här är %s -sidan"
+  "header": {
+    "preferences": {
+      "lang": {
+        "label": "Språk",
+        "option": {
+          "en": "English",
+          "sv": "Svenska",
+          "fi": "Suomi"
+        }
+      },
+      "theme": {
+        "label": "Tema",
+        "option": {
+          "auto": "Auto",
+          "light": "Ljust",
+          "dark": "Mörkt"
+        }
+      },
+      "cookieConsent": {
+        "label": "Kakor",
+        "state": {
+          "positive": "Du tillåter kakor och motsvarande teknologier.",
+          "negative": "Du tillåter inte kakor och motsvarande teknologier."
+        },
+        "action": {
+          "positive": "Tillåt",
+          "negative": "Tillåt inte"
+        }
+      }
     }
+  },
+  "index": {
+    "placeholderText": "Det här är en platshållar-text."
+  },
+  "cookieConsentSnackbar": {
+    "message": "Den här webbsidan använder kakor och motsvarande teknologier för att erbjuda en snabbare och mer anpassad användarupplevelse. Tillåter du användningen av kakor?",
+    "yes": "Ja",
+    "no": "Nej"
   }
 }
