@@ -9,44 +9,30 @@
       "cp -Rp .next/static/ public/_next/static"
     ]
   },
-  "hosting": [
-    {
-      "target": "mui-react-njs-cfr-template",
-      "public": "public",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-      "rewrites": [
-        {
-          "source": "/",
-          "function": "next-index"
-        },
-        {
-          "source": "/about",
-          "function": "next-about"
-        },
-        {
-          "source": "/example{,/**}",
-          "function": "next-example"
-        },
-        {
-          "source": "/@(en|sv|fi){,/**}",
-          "function": "next-lang"
-        }
-      ]
-    },
-    {
-      "target": "serverless",
-      "public": "public",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-      "rewrites": [
-        {
-          "source": "/",
-          "function": "next-serverless-index"
-        },
-        {
-          "source": "/about",
-          "function": "next-serverless-about"
-        }
-      ]
-    }
-  ]
+  "hosting": {
+    "cleanUrls": true,
+    "headers": [
+      {
+        "source": "string-resources/**",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          }
+        ]
+      }
+    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "public": "public",
+    "rewrites": [
+      {
+        "source": "/",
+        "function": "next-index"
+      },
+      {
+        "source": "/@(en|sv|fi){,/**}",
+        "function": "next-lang"
+      }
+    ]
+  }
 }
