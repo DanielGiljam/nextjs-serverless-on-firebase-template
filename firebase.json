@@ -13,7 +13,7 @@
     "cleanUrls": true,
     "headers": [
       {
-        "source": "string-resources/**",
+        "source": "@(string-resources|icons)/**",
         "headers": [
           {
             "key": "Access-Control-Allow-Origin",
