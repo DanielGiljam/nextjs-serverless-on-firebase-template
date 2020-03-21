@@ -9,7 +9,7 @@ import useStrings from "nextjs-global-app-state-strict-demo/useStrings"
 
 function Lang(): JSX.Element {
   const strings = useStrings().header.preferences.lang
-  const {lang, languages, setLang} = useGlobalAppState()
+  const {lang, languages, setLang, cookieConsent} = useGlobalAppState()
   function onChange(_event: MouseEvent<HTMLElement>, value: string): void {
     if (value) {
       setLang(value)
@@ -19,7 +19,12 @@ function Lang(): JSX.Element {
   }
   return (
     <li>
-      <Typography component={"label"} id={"language"} variant={"body1"}>
+      <Typography
+        color={cookieConsent ? "textPrimary" : "textSecondary"}
+        component={"label"}
+        id={"language"}
+        variant={"body1"}
+      >
         {strings.label}
       </Typography>
       <ToggleButtonGroup
@@ -32,6 +37,7 @@ function Lang(): JSX.Element {
           <ToggleButton
             key={lang as string}
             aria-label={lang as string}
+            disabled={!cookieConsent}
             value={lang}
           >
             {strings.option[lang as string]}

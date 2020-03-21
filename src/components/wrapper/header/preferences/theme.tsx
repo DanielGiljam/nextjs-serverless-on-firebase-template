@@ -9,7 +9,7 @@ import useStrings from "nextjs-global-app-state-strict-demo/useStrings"
 
 function Theme(): JSX.Element {
   const strings = useStrings().header.preferences.theme
-  const {theme, themes, setTheme} = useGlobalAppState()
+  const {theme, themes, setTheme, cookieConsent} = useGlobalAppState()
   function onChange(_event: MouseEvent<HTMLElement>, value: string): void {
     if (value) {
       setTheme(value)
@@ -19,7 +19,12 @@ function Theme(): JSX.Element {
   }
   return (
     <li>
-      <Typography component={"label"} id={"theme"} variant={"body1"}>
+      <Typography
+        color={cookieConsent ? "textPrimary" : "textSecondary"}
+        component={"label"}
+        id={"theme"}
+        variant={"body1"}
+      >
         {strings.label}
       </Typography>
       <ToggleButtonGroup
@@ -32,6 +37,7 @@ function Theme(): JSX.Element {
           <ToggleButton
             key={theme as string}
             aria-label={theme as string}
+            disabled={!cookieConsent}
             value={theme}
           >
             {strings.option[theme as string]}
