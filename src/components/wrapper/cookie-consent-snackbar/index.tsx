@@ -1,8 +1,8 @@
 import Button from "@material-ui/core/Button"
 import Snackbar from "@material-ui/core/Snackbar"
 
-import useGlobalAppState from "nextjs-global-app-state/useGlobalAppState"
-import useStrings from "nextjs-global-app-state/useStrings"
+import useGlobalAppState from "nextjs-global-app-state-strict-demo/useGlobalAppState"
+import useStrings from "nextjs-global-app-state-strict-demo/useStrings"
 
 import useStyles from "./styles"
 

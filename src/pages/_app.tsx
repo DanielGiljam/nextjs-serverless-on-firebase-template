@@ -6,9 +6,9 @@ import {
   responsiveFontSizes,
 } from "@material-ui/core/styles"
 
-import appFactory from "nextjs-global-app-state/appFactory"
-import lang from "nextjs-global-app-state/lang"
-import theme from "nextjs-global-app-state/theme"
+import appFactory from "nextjs-global-app-state-strict-demo/appFactory"
+import lang from "nextjs-global-app-state-strict-demo/lang"
+import theme from "nextjs-global-app-state-strict-demo/theme"
 
 import fetch from "isomorphic-unfetch"
 

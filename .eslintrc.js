@@ -52,7 +52,7 @@ module.exports = {
             position: "before",
           },
           {
-            pattern: "nextjs-global-app-state{,/**}",
+            pattern: "nextjs-global-app-state-strict-demo{,/**}",
             group: "external",
             position: "before",
           },

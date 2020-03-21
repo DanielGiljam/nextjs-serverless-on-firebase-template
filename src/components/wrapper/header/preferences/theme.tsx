@@ -4,8 +4,8 @@ import Typography from "@material-ui/core/Typography"
 import ToggleButton from "@material-ui/lab/ToggleButton"
 import ToggleButtonGroup from "@material-ui/lab/ToggleButtonGroup"
 
-import useGlobalAppState from "nextjs-global-app-state/useGlobalAppState"
-import useStrings from "nextjs-global-app-state/useStrings"
+import useGlobalAppState from "nextjs-global-app-state-strict-demo/useGlobalAppState"
+import useStrings from "nextjs-global-app-state-strict-demo/useStrings"
 
 function Theme(): JSX.Element {
   const strings = useStrings().header.preferences.theme

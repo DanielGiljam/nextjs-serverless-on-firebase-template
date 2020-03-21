@@ -8,8 +8,8 @@ import red from "@material-ui/core/colors/red"
 
 import color from "color"
 
-import useGlobalAppState from "nextjs-global-app-state/useGlobalAppState"
-import useStrings from "nextjs-global-app-state/useStrings"
+import useGlobalAppState from "nextjs-global-app-state-strict-demo/useGlobalAppState"
+import useStrings from "nextjs-global-app-state-strict-demo/useStrings"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

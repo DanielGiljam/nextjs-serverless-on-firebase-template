@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 
-const withGlobalAppState = require("nextjs-global-app-state/withGlobalAppState")
+const withGlobalAppState = require("nextjs-global-app-state-strict-demo/withGlobalAppState")
 
 require("dotenv").config()
 
