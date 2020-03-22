@@ -33,7 +33,14 @@ export default appFactory({
     }),
     theme({
       createTheme: (themeType) =>
-        responsiveFontSizes(createMuiTheme({palette: {type: themeType}})),
+        responsiveFontSizes(
+            createMuiTheme({
+              palette:
+              themeType === "server" ?
+                {type: "dark", background: {default: "#000000"}} :
+                {type: themeType},
+            }),
+        ),
       ThemeProvider: ThemeProvider as Provider<Theme>,
     }),
   ],
