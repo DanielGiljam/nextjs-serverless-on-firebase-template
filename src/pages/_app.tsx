@@ -24,7 +24,9 @@ export default appFactory({
       defaultLang: "en",
       defaultSupportedLanguages: ["en", "sv", "fi"],
       getStrings: async (lang) =>
-        await fetch(`${process.env.ASSET_PREFIX}/string-resources/${lang}.json`)
+        await fetch(
+            `${process.env.ASSET_PREFIX}/string-resources-047a3dc723f9db608076/${lang}.json`,
+        )
             .then((res) => res.json())
             .catch(() => {
               console.error(`Failed to fetch string resources for "${lang}".`)
