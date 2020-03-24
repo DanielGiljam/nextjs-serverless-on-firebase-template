@@ -30,7 +30,7 @@ function Header(): JSX.Element {
       </Head>
       <AppBar color={"transparent"} elevation={0} position={"static"}>
         <Toolbar variant={"dense"}>
-          <Typography className={styles.typography} variant={"overline"}>
+          <Typography className={styles.typography} variant={"overline"} noWrap>
             <NextLink href={{pathname: "/"}} passHref>
               <MuiLink
                 classes={{focusVisible: styles.linkFocusVisible}}
@@ -47,8 +47,8 @@ function Header(): JSX.Element {
             aria-haspopup={"true"}
             aria-label={"preferences"}
             className={styles.iconButton}
-            disableRipple={true}
             focusVisibleClassName={styles.iconButtonFocusVisible}
+            disableRipple
             onClick={(event): void => setPreferencesAnchor(event.currentTarget)}
           >
             <SettingsRoundedIcon />
