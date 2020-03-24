@@ -73,51 +73,80 @@ class _document extends __document {
     return (
       <Html lang={this.props.__NEXT_DATA__.props.dehydratedState.lang.value}>
         <Head>
-          <link href={"/icons/favicon-16.png"} rel={"icon"} sizes={"16x16"} />
-          <link href={"/icons/favicon-32.png"} rel={"icon"} sizes={"32x32"} />
-          <link href={"/icons/favicon-57.png"} rel={"icon"} sizes={"57x57"} />
-          <link href={"/icons/favicon-76.png"} rel={"icon"} sizes={"76x76"} />
-          <link href={"/icons/favicon-96.png"} rel={"icon"} sizes={"96x96"} />
           <link
-            href={"/icons/favicon-128.png"}
+            href={"icons-c34eff4ffb73531f429b/favicon-16.png"}
+            rel={"icon"}
+            sizes={"16x16"}
+          />
+          <link
+            href={"icons-c34eff4ffb73531f429b/favicon-32.png"}
+            rel={"icon"}
+            sizes={"32x32"}
+          />
+          <link
+            href={"icons-c34eff4ffb73531f429b/favicon-57.png"}
+            rel={"icon"}
+            sizes={"57x57"}
+          />
+          <link
+            href={"icons-c34eff4ffb73531f429b/favicon-76.png"}
+            rel={"icon"}
+            sizes={"76x76"}
+          />
+          <link
+            href={"icons-c34eff4ffb73531f429b/favicon-96.png"}
+            rel={"icon"}
+            sizes={"96x96"}
+          />
+          <link
+            href={"icons-c34eff4ffb73531f429b/favicon-120.png"}
+            rel={"icon"}
+            sizes={"120x120"}
+          />
+          <link
+            href={"icons-c34eff4ffb73531f429b/favicon-128.png"}
             rel={"icon"}
             sizes={"128x128"}
           />
           <link
-            href={"/icons/favicon-144.png"}
+            href={"icons-c34eff4ffb73531f429b/favicon-144.png"}
             rel={"icon"}
             sizes={"144x144"}
           />
           <link
-            href={"/icons/favicon-152.png"}
+            href={"icons-c34eff4ffb73531f429b/favicon-152.png"}
             rel={"icon"}
             sizes={"152x152"}
           />
           <link
-            href={"/icons/favicon-180.png"}
+            href={"icons-c34eff4ffb73531f429b/favicon-180.png"}
             rel={"icon"}
             sizes={"180x180"}
           />
           <link
-            href={"/icons/favicon-192.png"}
+            href={"icons-c34eff4ffb73531f429b/favicon-192.png"}
             rel={"icon"}
             sizes={"192x192"}
           />
 
           <link
-            href={"/icons/apple-touch-icon-precomposed-180.png"}
+            href={
+              "icons-c34eff4ffb73531f429b/apple-touch-icon-precomposed-180.png"
+            }
             rel={"apple-touch-icon-precomposed"}
             sizes={"180x180"}
           />
           <link
             color={"#262626"}
-            href={"/icons/icon-mask.svg"}
+            href={"icons-c34eff4ffb73531f429b/icon-mask.svg"}
             rel={"mask-icon"}
           />
 
           <meta content={"#262626"} name={"msapplication-TileColor"} />
           <meta
-            content={"/icons/msapplication/mediumtile-144.png"}
+            content={
+              "icons-c34eff4ffb73531f429b/msapplication/mediumtile-144.png"
+            }
             name={"msapplication-TileImage"}
           />
 
@@ -130,7 +159,7 @@ class _document extends __document {
             name={"msapplication-tooltip"}
           />
           <meta
-            content={"/icons/msapplication/ieconfig.xml"}
+            content={"icons-c34eff4ffb73531f429b/msapplication/ieconfig.xml"}
             name={"msapplication-config"}
           />
 
