@@ -31,7 +31,7 @@
     }
   },
   "index": {
-    "placeholderText": "Det här är en platshållar-text."
+    "text": "Den här sidan demonstrerar"
   },
   "cookieConsentSnackbar": {
     "message": "Den här webbsidan använder kakor och motsvarande teknologier för att erbjuda en snabbare och mer anpassad användarupplevelse. Tillåter du användningen av kakor?",

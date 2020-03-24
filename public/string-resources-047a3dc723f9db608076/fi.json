@@ -31,7 +31,7 @@
     }
   },
   "index": {
-    "placeholderText": "Tämä on paikanpitäjä-teksti."
+    "text": "Tämä sivu havainnollistaa"
   },
   "cookieConsentSnackbar": {
     "message": "Tämä nettisivu käyttää evästeitä ja vastaavia teknologioita jotta voimme tarjota sinulle nopeamman, räätälöitymmän käyttökokemuksen. Sallitko evästeiden käyttöä?",
