@@ -13,11 +13,20 @@
     "cleanUrls": true,
     "headers": [
       {
-        "source": "@(string-resources|icons)/**",
+        "source": "string-resources-047a3dc723f9db608076/**",
         "headers": [
           {
             "key": "Access-Control-Allow-Origin",
             "value": "*"
+          }
+        ]
+      },
+      {
+        "source": "@(_next|icons-c34eff4ffb73531f429b|string-resources-047a3dc723f9db608076)/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=31536000, immutable"
           }
         ]
       }

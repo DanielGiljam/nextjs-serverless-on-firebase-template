@@ -30,9 +30,7 @@
       }
     }
   },
-  "index": {
-    "placeholderText": "This is a placeholder text."
-  },
+  "thisSiteDemonstrates": "This site demonstrates",
   "cookieConsentSnackbar": {
     "message": "This website uses cookies and similar technologies in order to provide a faster, more customized user experience. Is it okay if we proceed in using cookies?",
     "yes": "Yes",
