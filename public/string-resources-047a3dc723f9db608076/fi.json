@@ -30,9 +30,7 @@
       }
     }
   },
-  "index": {
-    "text": "Tämä sivu havainnollistaa"
-  },
+  "thisSiteDemonstrates": "Tämä sivu havainnollistaa",
   "cookieConsentSnackbar": {
     "message": "Tämä nettisivu käyttää evästeitä ja vastaavia teknologioita jotta voimme tarjota sinulle nopeamman, räätälöitymmän käyttökokemuksen. Sallitko evästeiden käyttöä?",
     "yes": "Kyllä",

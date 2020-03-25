@@ -1,4 +1,5 @@
 import Link from "@material-ui/core/Link"
+import Paper from "@material-ui/core/Paper"
 import Typography from "@material-ui/core/Typography"
 
 import {Theme, createStyles, makeStyles} from "@material-ui/core/styles"
@@ -14,13 +15,13 @@ const useStyles = makeStyles((theme: Theme) => {
   let hoverColor
   let hoverBackground
   let focusBackground
-  let focusVisibleBackground
+  let focusBackgroundExtraStrong
   if (theme.palette.type === "light") {
     restColor = blue[500]
     hoverColor = blue[800]
     hoverBackground = "transparent"
     focusBackground = "transparent"
-    focusVisibleBackground = "transparent"
+    focusBackgroundExtraStrong = "transparent"
   } else {
     restColor = blue[100]
     hoverColor = blue[100]
@@ -32,17 +33,17 @@ const useStyles = makeStyles((theme: Theme) => {
         .alpha(0.12)
         .rgb()
         .toString()
-    focusVisibleBackground = color(blue[500])
+    focusBackgroundExtraStrong = color(blue[500])
         .alpha(0.2256)
         .rgb()
         .toString()
   }
   return createStyles({
-    typography: {
+    typography1: {
       padding: theme.spacing(3),
       textAlign: "center",
     },
-    link: {
+    templateLink: {
       "borderRadius": theme.shape.borderRadius,
       "color": restColor,
       "paddingLeft": theme.spacing(0.5),
@@ -58,9 +59,27 @@ const useStyles = makeStyles((theme: Theme) => {
         backgroundColor: focusBackground,
       },
     },
-    linkFocusVisible: {
-      backgroundColor: focusVisibleBackground,
-      color: hoverColor,
+    templateLinkFocusVisible: {
+      "backgroundColor": focusBackground,
+      "color": hoverColor,
+      "outline": "unset",
+      "@media(hover: none)": {
+        backgroundColor: focusBackgroundExtraStrong,
+      },
+    },
+    typography2: {
+      paddingTop: theme.spacing(1),
+      paddingBottom: theme.spacing(1),
+      textAlign: "right",
+    },
+    licenseLink: {
+      "color": theme.palette.text.secondary,
+      "&:hover": {
+        color: theme.palette.text.primary,
+      },
+    },
+    licenseLinkFocusVisible: {
+      color: theme.palette.text.primary,
       outline: "unset",
     },
   })
@@ -68,23 +87,47 @@ const useStyles = makeStyles((theme: Theme) => {
 
 function Index(): JSX.Element {
   const styles = useStyles()
-  const strings = useStrings().index
-  const href =
+  const strings = useStrings()
+  const templateLink =
     "https://github.com/DanielGiljam/nextjs-serverless-on-firebase-template"
+  const licenseLink =
+    "https://github.com/DanielGiljam/nextjs-serverless-on-firebase-template/blob/master/LICENSE"
   const anchor = "nextjs-serverless-on-firebase-template"
+  const copyright = "© 2020 Daniel Giljam"
+  const license = "MIT License"
   return (
-    <Typography className={styles.typography} variant={"body1"}>
-      {strings.text}
-      <br />
-      <Link
-        classes={{focusVisible: styles.linkFocusVisible}}
-        className={styles.link}
-        href={href}
-        underline={"none"}
+    <>
+      <Paper component={"main"}>
+        <Typography className={styles.typography1} variant={"body1"}>
+          {strings.thisSiteDemonstrates}
+          <br />
+          <Link
+            classes={{focusVisible: styles.templateLinkFocusVisible}}
+            className={styles.templateLink}
+            href={templateLink}
+            underline={"none"}
+          >
+            <code>{anchor}</code>
+          </Link>
+        </Typography>
+      </Paper>
+      <Typography
+        className={styles.typography2}
+        component={"footer"}
+        variant={"body2"}
       >
-        <code>{anchor}</code>
-      </Link>
-    </Typography>
+        <Link
+          classes={{focusVisible: styles.licenseLinkFocusVisible}}
+          className={styles.licenseLink}
+          href={licenseLink}
+          underline={"none"}
+        >
+          {copyright}
+          <br />
+          {license}
+        </Link>
+      </Typography>
+    </>
   )
 }
 
