@@ -8,7 +8,6 @@ import {
 
 import {Anchor} from "../index"
 
-import CookieConsent from "./cookie-consent"
 import Lang from "./lang"
 import Theme from "./theme"
 
@@ -21,6 +20,7 @@ const useStyles = makeStyles((theme: MuiTheme) =>
       "listStyleType": "none",
       "margin": 0,
       "padding": theme.spacing(2),
+      "textAlign": "center",
       "& > li": {
         "&:not(:first-child)": {
           marginTop: theme.spacing(2),
@@ -60,7 +60,6 @@ function Preferences({anchor, setAnchor}: PreferencesProps): JSX.Element {
     >
       <Lang />
       <Theme />
-      <CookieConsent />
     </Popover>
   )
 }

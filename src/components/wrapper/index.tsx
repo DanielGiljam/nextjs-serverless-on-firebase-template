@@ -2,7 +2,6 @@ import {ReactNode, useEffect} from "react"
 
 import Container from "@material-ui/core/Container"
 
-import CookieConsentSnackbar from "./cookie-consent-snackbar"
 import Header from "./header"
 
 function Wrapper({children}: {children: ReactNode}): JSX.Element {
@@ -16,7 +15,6 @@ function Wrapper({children}: {children: ReactNode}): JSX.Element {
         <Header />
         {children}
       </Container>
-      <CookieConsentSnackbar />
     </>
   )
 }
