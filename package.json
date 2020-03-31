@@ -42,7 +42,7 @@
     "generate-favicons": "^1.0.0",
     "husky": "^4.2.3",
     "isomorphic-unfetch": "^3.0.0",
-    "next": "^9.3.0",
+    "next": "^9.3.2",
     "nextjs-global-app-state": "^2.1.0",
     "prettier": "^1.19.1",
     "prettier-eslint": "^9.0.1",
